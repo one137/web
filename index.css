@@ -1,0 +1,53 @@
+body { 
+    margin: 0;
+    overflow: hidden; 
+    background-color: #161618; /* #222 */
+    font-family: "Menlo";
+    font-size: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+canvas { 
+    display: block;
+}
+
+#shells {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+a.hover {
+    color: #aaa;
+}
+
+#controls {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#controls button {
+    width: 35px;
+    height: 35px;
+    border: 0;
+    background-color: #333;
+    color: #aaa;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#controls button:hover {
+    background-color: #666;
+}
+

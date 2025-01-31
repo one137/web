@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electron Cloud Animation</title>
+<style>
+  body { margin: 0; overflow: hidden; background-color: #333; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const center = { x: canvas.width / 2, y: canvas.height / 2 };
+
+const numElectrons = 137;
+const orbitRadii = [53, 212, 477, 848, 1325];
+const orbitColors = ["#ffb3b3", "#ffd9b3", "#ffffb3", "#b3e6ff", "#b3ccff"]; // Brighter, subtly colored tones
+const framesBetweenJumps = 500000;
+const maxElectronSpeed = 0.005;
+const minElectronSpeed = 0.003;
+const maxRadiusVariation = 15;
+const transitionSpeedFactor = 0.1;
+const electronSize = 1.5;
+const nucleusDisplayFactor = 0.9;
+
+const maxOrbitRadius = orbitRadii[orbitRadii.length - 1];
+const scalingFactor = (nucleusDisplayFactor * Math.min(canvas.width, canvas.height)) / (2 * maxOrbitRadius);
+const adjustedOrbitRadii = orbitRadii.map(radius => radius * scalingFactor);
+
+function getRandomizedRadius(baseRadius) {
+  return baseRadius + (maxRadiusVariation * (Math.random() - 0.5));
+}
+
+function getJumpInterval() {
+  const averageJumpInterval = framesBetweenJumps / numElectrons;
+  return Math.floor(Math.random() * averageJumpInterval);
+}
+
+const electrons = [];
+for (let i = 0; i < numElectrons; i++) {
+  const angle = Math.random() * 2 * Math.PI;
+  const orbitIndex = Math.floor(Math.random() * adjustedOrbitRadii.length);
+  const baseRadius = adjustedOrbitRadii[orbitIndex];
+  const initialRadius = getRandomizedRadius(baseRadius);
+
+  electrons.push({
+    angle,
+    radius: initialRadius,
+    targetRadius: initialRadius,
+    color: orbitColors[orbitIndex],
+    speed: minElectronSpeed + Math.random() * (maxElectronSpeed - minElectronSpeed),
+    jumpInterval: getJumpInterval(),
+    jumpCounter: 0,
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  electrons.forEach((electron) => {
+    electron.jumpCounter++;
+    if (electron.jumpCounter >= electron.jumpInterval) {
+      electron.jumpCounter = 0;
+      electron.jumpInterval = getJumpInterval();
+
+      const newOrbitIndex = Math.floor(Math.random() * adjustedOrbitRadii.length);
+      const baseRadius = adjustedOrbitRadii[newOrbitIndex];
+      electron.targetRadius = getRandomizedRadius(baseRadius);
+      electron.color = orbitColors[newOrbitIndex];
+    }
+
+    electron.radius += (electron.targetRadius - electron.radius) * transitionSpeedFactor;
+
+    const x = center.x + electron.radius * Math.cos(electron.angle);
+    const y = center.y + electron.radius * Math.sin(electron.angle);
+
+    ctx.beginPath();
+    ctx.arc(x, y, electronSize, 0, Math.PI * 2);
+    ctx.fillStyle = electron.color;
+    ctx.fill();
+
+    electron.angle += electron.speed;
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>
+

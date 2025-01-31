@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>one137</title>
+      <link>https://one137.dev/knowledge</link>
+      <description>Last 10 notes on one137</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Homelab</title>
+    <link>https://one137.dev/knowledge/Homelab/Homelab</link>
+    <guid>https://one137.dev/knowledge/Homelab/Homelab</guid>
+    <description>Stuff to look into Logs monitoring: Prometheus + Grafana Traefik instead of NPM Build a comments section Install an AI platform ZFS replication Replace most of the config files by ...</description>
+    <pubDate>Fri, 31 Jan 2025 22:57:52 GMT</pubDate>
+  </item><item>
+    <title>Hardware</title>
+    <link>https://one137.dev/knowledge/Homelab/Hardware</link>
+    <guid>https://one137.dev/knowledge/Homelab/Hardware</guid>
+    <description>Hardware MinisForum BD790i AMD Ryzen 9 7945HX 16 cores, 32 threads Zen 4 architecture 2.5 GHz - up to 5.4 GHz under boost L1/2/3 caches: 1/16/64 MB 55-75W (AMD Configurable TDP) TSMC ...</description>
+    <pubDate>Wed, 29 Jan 2025 19:20:56 GMT</pubDate>
+  </item><item>
+    <title>Continuous Delivery of website</title>
+    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Continuous-Delivery-of-website</link>
+    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Continuous-Delivery-of-website</guid>
+    <description>The goal is to implement the ubiquitous “push to deploy” – a simple continuous delivery mechanism that automatically redeploys a git repo when a commit is pushed to its master branch ...</description>
+    <pubDate>Mon, 27 Jan 2025 16:02:24 GMT</pubDate>
+  </item><item>
+    <title>1 – IP, Routes, Subnets</title>
+    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/1-%E2%80%93-IP,-Routes,-Subnets</link>
+    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/1-%E2%80%93-IP,-Routes,-Subnets</guid>
+    <description>Goal Understand the output of commands such as ip addr (ifconfig on macOS) ip route and ss -tulpn (lsof -nP -i4TCP -sTCP:LISTEN on macOS) 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu ...</description>
+    <pubDate>Mon, 20 Jan 2025 14:32:36 GMT</pubDate>
+  </item><item>
+    <title>Linux Systems Setup</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
+    <description>General # As root sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install unattended-upgrades # configure auto-updates for long-term sys sudo dpkg-reconfigure --priority=low ...</description>
+    <pubDate>Mon, 20 Jan 2025 08:27:39 GMT</pubDate>
+  </item><item>
+    <title>Welcome to one137</title>
+    <link>https://one137.dev/knowledge/</link>
+    <guid>https://one137.dev/knowledge/</guid>
+    <description>This is my repository of thoughts and learnings. A small subset of what I write in my Obsidian vault gets published here. At the moment, all the published content is about my Homelab: a self-hosting experiment to enjoy the IT services I need – for free and with full control – and, more importantly, to hack around and learn about IT infrastructure and related topics.</description>
+    <pubDate>Sat, 18 Jan 2025 23:06:53 GMT</pubDate>
+  </item><item>
+    <title>Forward Proxy</title>
+    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Forward-Proxy</link>
+    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Forward-Proxy</guid>
+    <description>A forward proxy sits between users and the internet, acting as an intermediary for outbound requests. When users want to access external websites, their traffic goes through the forward proxy first.</description>
+    <pubDate>Sat, 18 Jan 2025 16:49:01 GMT</pubDate>
+  </item><item>
+    <title>Reverse Proxy</title>
+    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Reverse-Proxy</link>
+    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Reverse-Proxy</guid>
+    <description>A reverse proxy is a server that sits in front of internal services (such as web servers) and forwards client requests (e.g. from the internet) to them.</description>
+    <pubDate>Sat, 18 Jan 2025 16:41:28 GMT</pubDate>
+  </item><item>
+    <title>Homelab Services</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</guid>
+    <description>Current list of services hosted Hosted on Docker unless specified. Pi-Hole (x2, once on Bare) Wireguard (server and client) DNSMasq (for Wireguard server) Cloudflared ddclient Jellyfin Mailrise MongoDB Transmission Diun Uptime-Kuma Nginx Proxy Manager (NPM) including Web Server Portainer Syncthing (on TrueNAS) fail2ban (on Bare) Programmable config name, host, proxy, protocol router, 192.168.1.1, http://router:80, - pihole1, 192.168.1.98, http://pihole1:80, - proxmox, 192.168.1.99, https://proxmox:8006, WS truenas, 192.168.1.100, http://truenas:80, WS dockerhost, 192.168.1.101, - jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing, dockerhost, https://truenas:20910, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wireguard-easy, dockerhost, http://wireguard-easy:51821, - mailrise, dockerhost, stream://ct-mailrise:8025, TCP mongodb, dockerhost, stream://ct-mongodb:27017, TCP wireguard-easy, dockerhost, stream://wireguard-easy:51820, UDP cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
+    <pubDate>Sat, 18 Jan 2025 15:44:36 GMT</pubDate>
+  </item><item>
+    <title>TrueNAS</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</guid>
+    <description>TrueNAS Scale is a network-attached storage (NAS) product produced by iXsystems. Based on the Open ZFS file system, it runs on Linux and is compatible with virtualization hosts such as Proxmox.</description>
+    <pubDate>Sat, 18 Jan 2025 15:07:00 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
