@@ -106,7 +106,8 @@ async function handleSubmit(event) {
 
         setTimeout(resetSubmitState, resubmissionDelay) // Prevent double submissions (double-click etc)
     } catch (error) {
-        showSubmitError(error.message || "Error submitting comment. Please try again.")
+        console.error("Error submitting comment:", error)
+        showSubmitError("Error submitting comment. Please try again later.")
     }
 }
 
@@ -139,7 +140,7 @@ async function fetchComments() {
         `).join("\n")
         commentsListDiv.innerHTML = commentsHtml
     } catch (error) {
-        console.error("Error fetching comments:", error) // TMP
+        console.error("Error fetching comments:", error)
         commentsListDiv.innerHTML = "Error loading comments. Please try again later."
     }
 }
