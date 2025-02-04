@@ -185,15 +185,17 @@ function injectCommentsSection() {
 injectCommentsSection()
 fetchComments()
 
-// re-inject and re-fetch on SPA page changes (stackoverflow code)
+// re-inject and re-fetch on SPA page changes (modified stackoverflow code)
 window.onload = () => {
   let oldHref = document.location.href
   const body = document.querySelector('body')
   const observer = new MutationObserver(mutations => {
     if (oldHref !== document.location.href) {
         oldHref = document.location.href
-        injectCommentsSection()
-        fetchComments()
+        setTimeout(() => { // fixes occasional injection fails when using browser's back button
+            injectCommentsSection()
+            fetchComments()
+        }, 100)
     }
   })
   observer.observe(body, { childList: true, subtree: true })
