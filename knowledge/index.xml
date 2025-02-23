@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Pi-Hole</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
-    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
-    <pubDate>Tue, 04 Feb 2025 14:40:05 GMT</pubDate>
-  </item><item>
-    <title>Homelab Services</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</guid>
-    <description>Current list of services hosted Hosted on Docker unless specified. Pi-Hole (x2, once on Bare) Wireguard (server and client) DNSMasq (for Wireguard server) Cloudflared ddclient Jellyfin Mailrise MongoDB Transmission Diun Uptime-Kuma Nginx Proxy Manager (NPM) including web server Portainer Syncthing (on TrueNAS) fail2ban (on Bare) Programmable config name, host, proxy, protocol router, 192.168.1.1, http://router:80, - pihole1, 192.168.1.98, http://pihole1:80, - proxmox, 192.168.1.99, https://proxmox:8006, WS truenas, 192.168.1.100, http://truenas:80, WS dockerhost, 192.168.1.101, - jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing, dockerhost, https://truenas:20910, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wireguard-easy, dockerhost, http://wireguard-easy:51821, - mailrise, dockerhost, stream://ct-mailrise:8025, TCP mongodb, dockerhost, stream://ct-mongodb:27017, TCP wireguard-easy, dockerhost, stream://wireguard-easy:51820, UDP cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
-    <pubDate>Tue, 04 Feb 2025 14:36:45 GMT</pubDate>
+    <title>Portainer</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
+    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
+    <pubDate>Sun, 23 Feb 2025 13:18:10 GMT</pubDate>
   </item><item>
     <title>Nginx Proxy Manager (NPM)</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
     <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
-    <pubDate>Tue, 04 Feb 2025 14:36:30 GMT</pubDate>
-  </item><item>
-    <title>Public Website</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Public-Website</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Public-Website</guid>
-    <description>The website is accessible at one137.dev. It consists of a cute animation as the homepage, and a sort of Wiki at one137.dev/knowledge. The Wiki is based on Obsidian and Quartz and its creation process is detailed here.</description>
-    <pubDate>Tue, 04 Feb 2025 14:36:23 GMT</pubDate>
-  </item><item>
-    <title>Cloudflared</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Cloudflared</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Cloudflared</guid>
-    <description>Command-line daemon that creates secure tunnels between local services and Cloudflare’s edge network, allowing to expose local applications to the internet without opening inbound ...</description>
-    <pubDate>Tue, 04 Feb 2025 14:29:14 GMT</pubDate>
-  </item><item>
-    <title>Continuous Delivery</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</guid>
-    <description>The goal is to implement the ubiquitous “push to deploy” – a simple continuous delivery mechanism that automatically redeploys a git repo when a commit is pushed to its master branch ...</description>
-    <pubDate>Tue, 04 Feb 2025 14:23:04 GMT</pubDate>
+    <pubDate>Sun, 23 Feb 2025 13:14:54 GMT</pubDate>
   </item><item>
     <title>Comments API</title>
     <link>https://one137.dev/knowledge/Homelab/Public-website/Comments-API</link>
     <guid>https://one137.dev/knowledge/Homelab/Public-website/Comments-API</guid>
     <description>Custom solution that provides a comments section to every page of the Wiki. The frontend is generated by a script which is included at the bottom of every Quartz page.</description>
-    <pubDate>Tue, 04 Feb 2025 14:20:08 GMT</pubDate>
+    <pubDate>Sun, 23 Feb 2025 13:14:32 GMT</pubDate>
   </item><item>
-    <title>Obsidian Vault to Wiki</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Obsidian-Vault-to-Wiki</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Obsidian-Vault-to-Wiki</guid>
-    <description>A section of my website, the one you are one right now reading these lines, is a sort of wiki. The wiki’s content, aka the text pages or “notes”, are created using the awesome Obsidian app.</description>
-    <pubDate>Tue, 04 Feb 2025 14:10:48 GMT</pubDate>
+    <title>Uptime-Kuma</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</guid>
+    <description>Service monitoring tool with fancy UI. Monitoring uptime for HTTP(S) / TCP / Keyword and Json Query / Ping / DNS Record / Docker Containers / etc Notifications via Telegram, Pushover, SMTP, and 90 more Multiple status pages, Mappable to specific domains Ping chart, Certificate info, and much more.</description>
+    <pubDate>Sun, 23 Feb 2025 13:13:35 GMT</pubDate>
   </item><item>
-    <title>Remote Graphical OS Access</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access</guid>
-    <description>XRDP provides better performance than VNC and is easier to set up. It runs on port 3389 by default. sudo apt update &amp;&amp; sudo apt install xrdp sudo systemctl enable xrdp sudo systemctl start xrdp From a Mac, Microsoft Remote Desktop (available free from the Mac App Store) is good to access XRDP servers.</description>
-    <pubDate>Tue, 04 Feb 2025 13:35:19 GMT</pubDate>
+    <title>Diun</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Diun</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Diun</guid>
+    <description>Docker Image Update Notifier is a CLI application to receive notifications when a Docker image is updated on a Docker registry. Allow watching a Docker repository and report new tags Include and exclude filters with regular expression for tags Internal cron implementation Docker, Kubernetes, Swarm, Nomad, Dockerfile and File providers available crazymax.dev/diun/ Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/60-diun.yml Env vars set in the doc examples at their default value have been omitted, except LOG_LEVEL.</description>
+    <pubDate>Sun, 23 Feb 2025 13:13:17 GMT</pubDate>
   </item><item>
-    <title>Kali Linux</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Kali-Linux</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Kali-Linux</guid>
-    <description>Quid Debian fork focused on security, penetration testing in particular. It comes pre-installed with lots of tools for security testing. Great to learn about security and networking and testing the homelab from within.</description>
-    <pubDate>Tue, 04 Feb 2025 13:31:51 GMT</pubDate>
+    <title>Transmission</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Transmission</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Transmission</guid>
+    <description>Setup Create TrueNAS dataset and share with SMB: “video” Add to /etc/fstab: //192.168.1.100/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount ...</description>
+    <pubDate>Sun, 23 Feb 2025 13:12:44 GMT</pubDate>
+  </item><item>
+    <title>MongoDB</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/MongoDB</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/MongoDB</guid>
+    <description>Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-mongodb.yml Add ct-npm to 50-mongodb_internal network Add a stream host to NPM, through the ...</description>
+    <pubDate>Sun, 23 Feb 2025 13:11:55 GMT</pubDate>
+  </item><item>
+    <title>Mailrise</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Mailrise</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Mailrise</guid>
+    <description>Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-mailrise.yml mailrise.conf (file needs to be readable by user 999): configs: proxmox-notices-telegram: ...</description>
+    <pubDate>Sun, 23 Feb 2025 13:11:32 GMT</pubDate>
+  </item><item>
+    <title>Jellyfin</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Jellyfin</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Jellyfin</guid>
+    <description>In Docker Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-jellyfin.yml In Alpine LXC w/ video mount 💡 In separate LXC container instead of on dockerhost, ...</description>
+    <pubDate>Sun, 23 Feb 2025 13:11:16 GMT</pubDate>
+  </item><item>
+    <title>ddclient</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/ddclient</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/ddclient</guid>
+    <description>Simple CLI DynDNS service. Setup github.com/linuxserver/docker-ddclient /srv/docker/volumes/ddclient/ddclient.conf: daemon=300 syslog=yes mail-failure=root pid=/var/run/ddclient/ddclient.pid ssl=yes use=web, web=ipify-ipv4 protocol=cloudflare, \ zone=one137.dev, \ ttl=1, \ login=token, \ password=&lt;password&gt; \ &lt;sub&gt;.one137.dev chmod 600 ddclient.conf Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-ddclient.yml.</description>
+    <pubDate>Sun, 23 Feb 2025 13:10:57 GMT</pubDate>
   </item>
     </channel>
   </rss>
