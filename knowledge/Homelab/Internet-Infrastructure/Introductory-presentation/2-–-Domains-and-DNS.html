@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>2 – Domains and DNS</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains Mono&amp;family=Open Sans:wght@400;700&amp;family=Open Sans:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="one137"/><meta property="og:title" content="2 – Domains and DNS"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="2 – Domains and DNS"/><meta name="twitter:description" content="DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ..."/><meta property="og:description" content="DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ..."/><meta property="og:image:type" content="image/webp"/><meta property="og:image:alt" content="DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ..."/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:url" content="https://one137.dev/knowledge/static/og-image.png"/><meta name="twitter:image" content="https://one137.dev/knowledge/static/og-image.png"/><meta property="og:image" content="https://one137.dev/knowledge/static/og-image.png"/><meta property="twitter:domain" content="one137.dev/knowledge"/><meta property="og:url" content="https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS"/><meta property="twitter:url" content="https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS"/><link rel="icon" href="../../../static/icon.png"/><meta name="description" content="DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ..."/><meta name="generator" content="Quartz"/><link href="../../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  display: grid;
+  width: 90%;
+  height: 90vh;
+  margin: 5vh auto;
+  background: var(--light);
+  box-shadow: 0 14px 50px rgba(27, 33, 48, 0.12), 0 10px 30px rgba(27, 33, 48, 0.16);
+  overflow: hidden;
+  position: relative;
+}
+#mermaid-container > #mermaid-space > .mermaid-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-bottom: 1px solid var(--lightgray);
+  background: var(--light);
+  z-index: 2;
+  max-height: fit-content;
+}
+#mermaid-container > #mermaid-space > .mermaid-header > .close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--darkgray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-header > .close-button:hover {
+  background: var(--lightgray);
+  color: var(--dark);
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL1VzZXJzL2RvcmFuZGVsdXovRG9jdW1lbnRzL0NvZGUvb25lMTM3L3F1YXJ0ei9xdWFydHovY29tcG9uZW50cy9zdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0EsWUFDRTtFQUVGO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBS047RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIHdpZHRoOiA5MCU7XG4gICAgaGVpZ2h0OiA5MHZoO1xuICAgIG1hcmdpbjogNXZoIGF1dG87XG4gICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgIGJveC1zaGFkb3c6XG4gICAgICAwIDE0cHggNTBweCByZ2JhKDI3LCAzMywgNDgsIDAuMTIpLFxuICAgICAgMCAxMHB4IDMwcHggcmdiYSgyNywgMzMsIDQ4LCAwLjE2KTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuICAgICYgPiAubWVybWFpZC1oZWFkZXIge1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gICAgICBwYWRkaW5nOiAxcmVtO1xuICAgICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICB6LWluZGV4OiAyO1xuICAgICAgbWF4LWhlaWdodDogZml0LWNvbnRlbnQ7XG5cbiAgICAgICYgPiAuY2xvc2UtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmtncmF5KTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRlbnQge1xuICAgICAgcGFkZGluZzogMnJlbTtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><script src="../../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../../..">one137</a></h2><div class="spacer mobile-only"></div><div class="search"><button class="search-button" id="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div><span>Theme:  </span><button class="darkmode" id="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div class="explorer desktop-only"><button type="button" id="explorer" data-behavior="collapse" data-collapsed="collapsed" data-savestate="true" data-tree="[{&quot;path&quot;:&quot;Homelab&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Internet-Infrastructure&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Internet-Infrastructure/Introductory-presentation&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/OS-and-Virtualization&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Public-website&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Security&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Services&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Storage&quot;,&quot;collapsed&quot;:true}]" aria-controls="explorer-content" aria-expanded="false"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-content"><ul class="overflow" id="explorer-ul"><li><div class="folder-outer open"><ul style="padding-left:0;" class="content" data-folderul><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab"><button class="folder-button"><span class="folder-title">Homelab</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Internet-Infrastructure"><button class="folder-button"><span class="folder-title">Internet Infrastructure</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Internet-Infrastructure"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Internet-Infrastructure/Introductory-presentation"><button class="folder-button"><span class="folder-title">Introductory presentation</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Internet-Infrastructure/Introductory-presentation"><li><a href="../../../Homelab/Internet-Infrastructure/Introductory-presentation/1-–-IP,-Routes,-Subnets" data-for="Homelab/Internet-Infrastructure/Introductory-presentation/1-–-IP,-Routes,-Subnets">1 – IP, Routes, Subnets</a></li><li><a href="../../../Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS" data-for="Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS">2 – Domains and DNS</a></li></ul></div></li><li><a href="../../../Homelab/Internet-Infrastructure/Cloudflare" data-for="Homelab/Internet-Infrastructure/Cloudflare">Cloudflare</a></li><li><a href="../../../Homelab/Internet-Infrastructure/Forward-Proxy" data-for="Homelab/Internet-Infrastructure/Forward-Proxy">Forward Proxy</a></li><li><a href="../../../Homelab/Internet-Infrastructure/Reverse-Proxy" data-for="Homelab/Internet-Infrastructure/Reverse-Proxy">Reverse Proxy</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/OS-and-Virtualization"><button class="folder-button"><span class="folder-title">OS and Virtualization</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/OS-and-Virtualization"><li><a href="../../../Homelab/OS-and-Virtualization/Alpine-(Distro)" data-for="Homelab/OS-and-Virtualization/Alpine-(Distro)">Alpine (Distro)</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Debian" data-for="Homelab/OS-and-Virtualization/Debian">Debian</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Docker" data-for="Homelab/OS-and-Virtualization/Docker">Docker</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Kali-Linux" data-for="Homelab/OS-and-Virtualization/Kali-Linux">Kali Linux</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Linux-Systems-Setup" data-for="Homelab/OS-and-Virtualization/Linux-Systems-Setup">Linux Systems Setup</a></li><li><a href="../../../Homelab/OS-and-Virtualization/LXC" data-for="Homelab/OS-and-Virtualization/LXC">LXC</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Proxmox" data-for="Homelab/OS-and-Virtualization/Proxmox">Proxmox</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access" data-for="Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access">Remote Graphical OS Access</a></li><li><a href="../../../Homelab/OS-and-Virtualization/TrueNAS" data-for="Homelab/OS-and-Virtualization/TrueNAS">TrueNAS</a></li><li><a href="../../../Homelab/OS-and-Virtualization/Virtualization" data-for="Homelab/OS-and-Virtualization/Virtualization">Virtualization</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Public-website"><button class="folder-button"><span class="folder-title">Public website</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Public-website"><li><a href="../../../Homelab/Public-website/Comments-API" data-for="Homelab/Public-website/Comments-API">Comments API</a></li><li><a href="../../../Homelab/Public-website/Continuous-Delivery" data-for="Homelab/Public-website/Continuous-Delivery">Continuous Delivery</a></li><li><a href="../../../Homelab/Public-website/Obsidian-Vault-to-Wiki" data-for="Homelab/Public-website/Obsidian-Vault-to-Wiki">Obsidian Vault to Wiki</a></li><li><a href="../../../Homelab/Public-website/Public-Website" data-for="Homelab/Public-website/Public-Website">Public Website</a></li><li><a href="../../../Homelab/Public-website/Serve-static-files-through-NPM" data-for="Homelab/Public-website/Serve-static-files-through-NPM">Serve static files through NPM</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Security"><button class="folder-button"><span class="folder-title">Security</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Security"><li><a href="../../../Homelab/Security/fail2ban" data-for="Homelab/Security/fail2ban">fail2ban</a></li><li><a href="../../../Homelab/Security/Homelab-Security" data-for="Homelab/Security/Homelab-Security">Homelab Security</a></li><li><a href="../../../Homelab/Security/Security---Cryptography" data-for="Homelab/Security/Security---Cryptography">Security - Cryptography</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Services"><button class="folder-button"><span class="folder-title">Services</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Services"><li><a href="../../../Homelab/Services/Cloudflared" data-for="Homelab/Services/Cloudflared">Cloudflared</a></li><li><a href="../../../Homelab/Services/ddclient" data-for="Homelab/Services/ddclient">ddclient</a></li><li><a href="../../../Homelab/Services/Diun" data-for="Homelab/Services/Diun">Diun</a></li><li><a href="../../../Homelab/Services/DNSMasq" data-for="Homelab/Services/DNSMasq">DNSMasq</a></li><li><a href="../../../Homelab/Services/Healthchecks" data-for="Homelab/Services/Healthchecks">Healthchecks</a></li><li><a href="../../../Homelab/Services/Homelab-Networking" data-for="Homelab/Services/Homelab-Networking">Homelab Networking</a></li><li><a href="../../../Homelab/Services/Homelab-Services" data-for="Homelab/Services/Homelab-Services">Homelab Services</a></li><li><a href="../../../Homelab/Services/Jellyfin" data-for="Homelab/Services/Jellyfin">Jellyfin</a></li><li><a href="../../../Homelab/Services/Mailrise" data-for="Homelab/Services/Mailrise">Mailrise</a></li><li><a href="../../../Homelab/Services/MongoDB" data-for="Homelab/Services/MongoDB">MongoDB</a></li><li><a href="../../../Homelab/Services/Nginx-Proxy-Manager-(NPM)" data-for="Homelab/Services/Nginx-Proxy-Manager-(NPM)">Nginx Proxy Manager (NPM)</a></li><li><a href="../../../Homelab/Services/Pi-Hole" data-for="Homelab/Services/Pi-Hole">Pi-Hole</a></li><li><a href="../../../Homelab/Services/Portainer" data-for="Homelab/Services/Portainer">Portainer</a></li><li><a href="../../../Homelab/Services/Syncthing" data-for="Homelab/Services/Syncthing">Syncthing</a></li><li><a href="../../../Homelab/Services/Transmission" data-for="Homelab/Services/Transmission">Transmission</a></li><li><a href="../../../Homelab/Services/Uptime-Kuma" data-for="Homelab/Services/Uptime-Kuma">Uptime-Kuma</a></li><li><a href="../../../Homelab/Services/Watchtower" data-for="Homelab/Services/Watchtower">Watchtower</a></li><li><a href="../../../Homelab/Services/Wireguard" data-for="Homelab/Services/Wireguard">Wireguard</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Storage"><button class="folder-button"><span class="folder-title">Storage</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Storage"><li><a href="../../../Homelab/Storage/iSCSI" data-for="Homelab/Storage/iSCSI">iSCSI</a></li><li><a href="../../../Homelab/Storage/NAS-Data-Protection" data-for="Homelab/Storage/NAS-Data-Protection">NAS Data Protection</a></li><li><a href="../../../Homelab/Storage/Network-Shares" data-for="Homelab/Storage/Network-Shares">Network Shares</a></li><li><a href="../../../Homelab/Storage/NVMe" data-for="Homelab/Storage/NVMe">NVMe</a></li><li><a href="../../../Homelab/Storage/PCIe" data-for="Homelab/Storage/PCIe">PCIe</a></li><li><a href="../../../Homelab/Storage/SATA" data-for="Homelab/Storage/SATA">SATA</a></li><li><a href="../../../Homelab/Storage/SCSI" data-for="Homelab/Storage/SCSI">SCSI</a></li><li><a href="../../../Homelab/Storage/SCSI-vs-NVMe-vs-AHCI-(SATA)" data-for="Homelab/Storage/SCSI-vs-NVMe-vs-AHCI-(SATA)">SCSI vs NVMe vs AHCI (SATA)</a></li><li><a href="../../../Homelab/Storage/XFS" data-for="Homelab/Storage/XFS">XFS</a></li><li><a href="../../../Homelab/Storage/ZFS" data-for="Homelab/Storage/ZFS">ZFS</a></li><li><a href="../../../Homelab/Storage/ZFS-Dataset--and--Zvol" data-for="Homelab/Storage/ZFS-Dataset--and--Zvol">ZFS Dataset &amp; Zvol</a></li><li><a href="../../../Homelab/Storage/ZFS-VDEV--and--Storage" data-for="Homelab/Storage/ZFS-VDEV--and--Storage">ZFS VDEV &amp; Storage</a></li></ul></div></li><li><a href="../../../Homelab/Hardware" data-for="Homelab/Hardware">Hardware</a></li><li><a href="../../../Homelab/Homelab" data-for="Homelab/Homelab">Homelab</a></li></ul></div></li><li><div class="folder-outer "><ul style="padding-left:0;" class="content" data-folderul></ul></div></li></ul></div></li><li id="explorer-end"></li></ul></div></div><footer class="desktop-only"><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.0</a> © 2025</p><ul></ul></footer></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../../">one137</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../Homelab/">Homelab</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../Homelab/Internet-Infrastructure/">Internet Infrastructure</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../../Homelab/Internet-Infrastructure/Introductory-presentation/">Introductory presentation</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>2 – Domains and DNS</a></div></nav><h1 class="article-title">2 – Domains and DNS</h1><p show-comma="true" class="content-meta"><time datetime="2025-05-16T09:25:18.000Z">May 16, 2025</time></p></div></div><article class="popover-hint"><h2 id="dns-fundamentals">DNS Fundamentals<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dns-fundamentals" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>DNS (Domain Name System) translates human-readable domain names into IP addresses</li>
+<li>Like a phone book for the Internet… or your LAN</li>
+<li>On the Internet: hierarchical, distributed database system
+<ul>
+<li>We’ll see what that means</li>
+</ul>
+</li>
+</ul>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    User[User types&lt;br>www. example.com] --> DNS[DNS Server]\n    DNS --> IP[Returns IP&lt;br>96.7.128.198]\n    IP --> Web[Web Browser connects&lt;br>to IP address]&quot;">flowchart LR
+    User[User types&lt;br>www. example.com] --> DNS[DNS Server]
+    DNS --> IP[Returns IP&lt;br>96.7.128.198]
+    IP --> Web[Web Browser connects&lt;br>to IP address]
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>Ok, but what is a “Domain Name” exactly?</p>
+<hr/>
+<h2 id="hostname-domain-name-fqdn">Hostname, Domain name, FQDN<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hostname-domain-name-fqdn" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>Hostname</strong>: Name of a specific device (e.g., <code>laptop1</code>, <code>dockerhost</code>, <code>node12345</code>, <code>mongodb</code>) with an least one IP address.
+<ul>
+<li>Technically, “hostname” is also the full domain name, e.g. <code>node12345.appengine.host.net</code></li>
+</ul>
+</li>
+<li><strong>Domain name</strong>: Network/organizational namespace (e.g., <code>example.com</code>, <code>appengine.host.net</code>, <code>one137.dev</code>)
+<ul>
+<li>“A string that identifies a realm of administrative autonomy, authority or control”</li>
+<li>“Domain names are formed by the rules and procedures of the Domain Name System (DNS)”</li>
+</ul>
+</li>
+<li><strong>FQDN</strong> (Fully Qualified Domain Name): Name including hostname and domain name
+<ul>
+<li>Technically: Completely specified DN, including a top-level domain (TLD) of the Internet</li>
+<li>Format: <code>hostname.subdomain.domain.tld.</code> (trailing dot is optional)</li>
+<li>Example: <code>example.com.</code>, <code>mail.google.com.</code>, <code>node12345.appengine.host.net</code>, <code>macbook.lan</code></li>
+</ul>
+</li>
+</ul>
+<p>[LIVE EXAMPLE]</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">hostname</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -s</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">hostname</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -d</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">hostname</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -f</span></span></code></pre></figure>
+<p>Let’s dig a little deeper into FQDNs…</p>
+<hr/>
+<h2 id="dns-root-domain-tlds">DNS Root Domain, TLDs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dns-root-domain-tlds" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><img src="../../../DNS_schema.svg.png" width="400" height="auto" alt="center"/></p>
+<ul>
+<li>The <strong>DNS root domain</strong> is the top-level DNS domain in the hierarchical namespace of the DNS of the Internet.
+<ul>
+<li>It’s the optional ”.” in FQDNs (<code>en.wikipedia.org.</code>)</li>
+<li>13 root name server addresses, <code>a.root-servers.net.</code> to <code>m.root-servers.net.</code></li>
+<li>Their IP addresses are hardcoded in DNS systems, otherwise there’d be a circular dependency</li>
+<li>Managed by the ICANN (Internet Corporation for Assigned Names and Numbers)</li>
+<li>Root name servers know the IPs of all TLDs</li>
+</ul>
+</li>
+<li>A <strong>Top-Level Domain (TLD)</strong> is one at the highest level in the hierarchical DNS of the Internet after the root domain
+<ul>
+<li>Examples: <code>com</code>, <code>ch</code>, <code>dev</code></li>
+<li>Management responsibility of TLDs is delegated to specific organizations by the ICANN</li>
+<li>TLD name servers know the IPs of all authoritative name server in their zone.</li>
+</ul>
+</li>
+</ul>
+<p>What’s an Authoritative name server and what’s a zone?</p>
+<hr/>
+<h2 id="name-server-types-and-dns-zones">Name Server Types and DNS Zones<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#name-server-types-and-dns-zones" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A name server is simply a server that can answer DNS queries.</p>
+<p>There are primarily 3 types of name servers:</p>
+<ul>
+<li><strong>Authoritative servers</strong>: Holds the official answer of <em>this FQDN = this IP</em>, for a limited number of FQDNs (their <strong>DNS Zone</strong>)</li>
+<li><strong>Recursive resolvers</strong>: Doesn’t hold DNS records but knows who to ask to get the info</li>
+<li><strong>Caching server</strong>: Caches DNS results and just asks another RR when it doesn’t know. In practice most RRs are also caching servers.</li>
+</ul>
+<p>Every domain name is defined in a <strong>zone</strong> served by one or more authoritative name servers.</p>
+<ul>
+<li>Example: <code>app.one137.dev</code> and <code>stage.one137.dev</code> are part of the zone <code>one137.dev</code> and are served by <code>rory.ns.cloudflare.com</code> and <code>stevie.ns.cloudflare.com</code>.</li>
+<li>We’ll look at DNS records in more details later on.</li>
+</ul>
+<p><img src="../../../DNS_schema.svg.png" width="400" height="auto" alt="center"/></p>
+<h2 id="full-dns-resolution-example">Full DNS Resolution Example<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#full-dns-resolution-example" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant C as Client (You)\n    participant R as Recursive Resolver&lt;br>(eg. your router's&lt;br>DNS Server)\n    participant Root as Root&lt;br>Nameserver\n    participant TLD as .dev TLD&lt;br>Nameserver\n    participant NS as one137.dev&lt;br>Authoritative&lt;br>Nameserver\n    participant Web as one137.dev&lt;br>Webserver\n\n    C->>C: Do I know one137.dev,&lt;br>e.g. from /etc/hosts? => No\n    C->>R: one137.dev?\n    R->>R: Is one137.dev in my&lt;br>cache within TTL? => No\n    R->>Root: one137.dev?\n    Root->>R: Ask a .dev nameserver @&lt;br>a.gtld-servers.net / 192.5.6.30\n    R->>TLD: one137.dev?\n    TLD->>R: Ask a one137.dev nameserver @&lt;br>rory.ns.cloudflare.com / 108.162.195.166\n    R->>NS: one137.dev?\n    NS->>R: one137.dev = 188.114.97.12\n    R->>C: 188.114.97.12\n    C->>Web: Establish TCP connection (see&lt;br>\&quot;Brief intro to TCP\&quot;) @ 188.114.97.12&quot;">sequenceDiagram
+    participant C as Client (You)
+    participant R as Recursive Resolver&lt;br>(eg. your router's&lt;br>DNS Server)
+    participant Root as Root&lt;br>Nameserver
+    participant TLD as .dev TLD&lt;br>Nameserver
+    participant NS as one137.dev&lt;br>Authoritative&lt;br>Nameserver
+    participant Web as one137.dev&lt;br>Webserver
+
+    C->>C: Do I know one137.dev,&lt;br>e.g. from /etc/hosts? => No
+    C->>R: one137.dev?
+    R->>R: Is one137.dev in my&lt;br>cache within TTL? => No
+    R->>Root: one137.dev?
+    Root->>R: Ask a .dev nameserver @&lt;br>a.gtld-servers.net / 192.5.6.30
+    R->>TLD: one137.dev?
+    TLD->>R: Ask a one137.dev nameserver @&lt;br>rory.ns.cloudflare.com / 108.162.195.166
+    R->>NS: one137.dev?
+    NS->>R: one137.dev = 188.114.97.12
+    R->>C: 188.114.97.12
+    C->>Web: Establish TCP connection (see&lt;br>&quot;Brief intro to TCP&quot;) @ 188.114.97.12
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<hr/>
+<h2 id="dns-tool-dig">DNS Tool: dig<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dns-tool-dig" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>dig</code> is a flexible tool for interrogating DNS name servers. It performs DNS lookups and displays the answers that are returned from the name server(s) that were queried.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Short output (just IP)</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> +short</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Query NS records</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> NS</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Basic query</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Trace full resolution path (ithout DNSSEC)</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> +trace</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> +nodnssec</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Query specific nameserver</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> @8.8.8.8</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span></code></pre></figure>
+<p><code>nslookup</code> is another popular tool to get a quick answer about the IP address of a FQDN.</p>
+<p>[LIVE EXAMPLE]</p>
+<hr/>
+<h2 id="registering-a-domain-name">Registering a Domain Name<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#registering-a-domain-name" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>If you want to use a domain name on the Internet, you need to register it.</p>
+<ul>
+<li>Must be purchased through an accredited <strong>Registrar</strong>  (e.g. infomaniak.ch)</li>
+<li>Annual fees</li>
+<li>Public registration information / WHOIS (can be hidden)</li>
+<li>Global DNS propagation</li>
+</ul>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant U as User\n    participant R as Registrar\n    participant I as ICANN\n\n    U->>R: Search for available domain\n    R->>I: Check domain availability\n    I->>R: Domain available\n    R->>U: Domain can be purchased\n    U->>R: Purchase domain\n    R->>I: Register domain ownership\n    I->>R: Confirm registration\n    R->>U: Provide domain management tools&quot;">sequenceDiagram
+    participant U as User
+    participant R as Registrar
+    participant I as ICANN
+
+    U->>R: Search for available domain
+    R->>I: Check domain availability
+    I->>R: Domain available
+    R->>U: Domain can be purchased
+    U->>R: Purchase domain
+    R->>I: Register domain ownership
+    I->>R: Confirm registration
+    R->>U: Provide domain management tools
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>The Registrar then usually manages the DNS zone (i.e. becomes the Authoritative name server), but not always.</p>
+<p>[LIVE EXAMPLE]
+<a href="https://shop.infomaniak.com/order2/select/domain" class="external">https://shop.infomaniak.com/order2/select/domain<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<hr/>
+<h2 id="domain-zone-and-records">Domain Zone and Records<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#domain-zone-and-records" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>As we saw, the Authoritative Servers:</p>
+<ul>
+<li>Holds official DNS records for domains in their zone</li>
+<li>Usually provided by Registrars, but can be any DNS name server</li>
+<li>The FQDNs of a zone’s authoritative servers are listed in the “NS” records of that zone.
+<ul>
+<li>Example: <code>dig NS one137.dev</code> <span>⇒</span> <code>one137.dev.		86400	IN	NS	rory.ns.cloudflare.com.</code></li>
+</ul>
+</li>
+</ul>
+<p>Some common types of DNS records are:</p>
+<ul>
+<li>A - IPv4 address</li>
+<li>AAAA - IPv6 address</li>
+<li>CNAME - Alias</li>
+<li>MX - Mail exchange</li>
+<li>NS - Name server</li>
+<li>TXT - Text record</li>
+</ul>
+<p>[LIVE EXAMPLE]
+<a href="https://manager.infomaniak.com/v3/308659/ng/domain/1772208/dns/manage-zone/list" class="external">https://manager.infomaniak.com/v3/308659/ng/domain/1772208/dns/manage-zone/list<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>
+<a href="https://dash.cloudflare.com/3bafbaf02e7eb31c839bece8729e3a39/one137.dev/dns/records" class="external">https://dash.cloudflare.com/3bafbaf02e7eb31c839bece8729e3a39/one137.dev/dns/records<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<hr/>
+<h2 id="using-domains-and-dns-on-a-lan">Using Domains and DNS on a LAN<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#using-domains-and-dns-on-a-lan" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Local networks can have their own domain namespace and DNS</p>
+<ul>
+<li>Unlike on the Internet, domain names don’t need to be registered or globally unique.</li>
+<li>Common practice: use <code>.local</code> or <code>.lan</code> as TLDs, or use a global domain you own.</li>
+</ul>
+<p>You will need a DNS server on your LAN to resolve the names to their IP addresses (most home routers have one).</p>
+<p>[LIVE EXAMPLE]</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Use a global DNS server</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">nmap</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -sn</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> 192.168.1.0/24</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> grep</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;report&quot;</span></span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># U;;;;se a local DNS server</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">nmap</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -sn</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> 192.168.1.0/24</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> |</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> grep</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;report&quot;</span></span></code></pre></figure>
+<hr/>
+<h2 id="which-dns-server-does-my-computer-use">Which DNS server does my computer use?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#which-dns-server-does-my-computer-use" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The address of your DNS server can be specified:</p>
+<ol>
+<li>By the LAN’s DHCP server (most common)
+<ul>
+<li>Option 6: DNS server address(es)
+<ul>
+<li>Example <code>192.168.1.1</code> (your router), <code>123.45.67.89</code> (your ISP’s DNS), <code>192.168.1.98</code> (a local DNS)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>By manual configuration
+<ul>
+<li>Static DNS server settings</li>
+<li>Fallback when DHCP is unavailable</li>
+</ul>
+</li>
+</ol>
+<p>Hostname&lt;>IP mappings can also be hardcoded in <code>/etc/hosts</code>.</p>
+<p>[LIVE EXAMPLE]</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/hosts</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ssh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> user@dockerhost</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/hosts</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ssh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> user@pihole1</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/dnsmasq.d/99-second-DNS.conf</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/resolv.conf</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">scutil</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --dns</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;; </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># macOS only, also Settings>Network>Wifi>Details>DNS</span></span></code></pre></figure>
+<hr/>
+<h2 id="search-domains-and-local-dns-resolution-example">Search Domains and local DNS resolution example<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#search-domains-and-local-dns-resolution-example" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>The DHCP server (or your manual config) should also specify:</p>
+<ul>
+<li>A default domain name (<code>.lan</code> or <code>.one137.dev</code>)
+<ul>
+<li>Devices will get their FQDN by combining their hostname with this domain</li>
+</ul>
+</li>
+<li>Search domain(s)
+<ul>
+<li>List of domains to try when resolving incomplete hostnames</li>
+<li>Example: typing <code>server1</code> can resolve to <code>server1.lan</code> or <code>server1.one137.dev</code></li>
+</ul>
+</li>
+</ul>
+<p>Therefore the full process when typing e.g. <code>ssh user@dockerhost</code> in your terminal is:</p>
+<ol>
+<li>Is <code>dockerhost</code> defined in /etc/hosts?</li>
+<li>No, is it a FQDN?</li>
+<li>No, let’s apply the search domain <span>⇒</span> <code>dockerhost.lan</code></li>
+<li>What’s my DNS server? Check in <code>/etc/resolv.conf</code> <span>⇒</span> <code>192.168.1.98</code></li>
+<li>Ask <code>192.168.1.98</code> what’s the IP address of <code>dockerhost.lan</code> <span>⇒</span> <code>192.168.1.101</code></li>
+<li>Establish connection to <code>192.168.1.101</code> on port 22 (ssh)</li>
+</ol>
+<hr/>
+<h2 id="network-ad-blocking-pi-hole-example">Network Ad-blocking (Pi-hole) Example<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#network-ad-blocking-pi-hole-example" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Visiting a news website:</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant B as Browser\n    participant P as Pi-hole\n    participant D as DNS Servers\n\n    B->>P: Query: news.example.com?\n    P->>D: Query: news.example.com?\n    D->>P: Response: 93.184.216.34\n    P->>B: Response: 93.184.216.34\n\n    B->>P: Query: ads.trackingsite.com?\n    Note over P: Check blocking lists\n    P->>B: Response: 0.0.0.0 (blocked)&quot;">sequenceDiagram
+    participant B as Browser
+    participant P as Pi-hole
+    participant D as DNS Servers
+
+    B->>P: Query: news.example.com?
+    P->>D: Query: news.example.com?
+    D->>P: Response: 93.184.216.34
+    P->>B: Response: 93.184.216.34
+
+    B->>P: Query: ads.trackingsite.com?
+    Note over P: Check blocking lists
+    P->>B: Response: 0.0.0.0 (blocked)
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>Pi-hole configuration:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="conf" data-theme="github-light github-dark"><code data-language="conf" data-theme="github-light github-dark" style="display:grid;"><span data-line><span># Example blocklist entry</span></span>
+<span data-line><span>0.0.0.0 ads.trackingsite.com</span></span>
+<span data-line><span>0.0.0.0 metrics.analytics.com</span></span></code></pre></figure>
+<hr/>
+<h2 id="dns-security">DNS Security<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dns-security" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Common threats and protections:</p>
+<ol>
+<li>DNS Spoofing/Cache Poisoning
+<ul>
+<li>DNSSEC adds cryptographic signatures</li>
+<li>Response verification</li>
+</ul>
+</li>
+<li>DNS Tunneling
+<ul>
+<li>Can be used to bypass firewalls and smuggle data</li>
+<li>Monitor unusual DNS traffic patterns</li>
+<li>Restrict recursive queries</li>
+</ul>
+</li>
+<li>DDoS Attacks
+<ul>
+<li>Rate limiting</li>
+<li>Anycast deployment (load balancing)</li>
+<li>Response caching</li>
+</ul>
+</li>
+</ol>
+<p>DNSSEC chain of trust:</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    Root[Root Key&lt;br>aka Master key&lt;br>of the Internet] -->|Signs| TLD[TLD Key&lt;br>e.g. .net]\n    TLD -->|Signs| Domain[Domain Key&lt;br>e.g. Cloudflare]\n    Domain -->|Signs| Records[DNS Records&lt;br>e.g. one137.dev]&quot;">flowchart LR
+    Root[Root Key&lt;br>aka Master key&lt;br>of the Internet] -->|Signs| TLD[TLD Key&lt;br>e.g. .net]
+    TLD -->|Signs| Domain[Domain Key&lt;br>e.g. Cloudflare]
+    Domain -->|Signs| Records[DNS Records&lt;br>e.g. one137.dev]
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>[LIVE EXAMPLE]</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">dig</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> +trace</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> one137.dev</span></span></code></pre></figure></article><hr/><div id="one137-comments"></div><script src="/comments.js"></script><div class="page-footer"></div></div><div class="right sidebar"><div class="toc desktop-only"><button type="button" id="toc" class aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content" class><ul class="overflow"><li class="depth-0"><a href="#dns-fundamentals" data-for="dns-fundamentals">DNS Fundamentals</a></li><li class="depth-0"><a href="#hostname-domain-name-fqdn" data-for="hostname-domain-name-fqdn">Hostname, Domain name, FQDN</a></li><li class="depth-0"><a href="#dns-root-domain-tlds" data-for="dns-root-domain-tlds">DNS Root Domain, TLDs</a></li><li class="depth-0"><a href="#name-server-types-and-dns-zones" data-for="name-server-types-and-dns-zones">Name Server Types and DNS Zones</a></li><li class="depth-0"><a href="#full-dns-resolution-example" data-for="full-dns-resolution-example">Full DNS Resolution Example</a></li><li class="depth-0"><a href="#dns-tool-dig" data-for="dns-tool-dig">DNS Tool: dig</a></li><li class="depth-0"><a href="#registering-a-domain-name" data-for="registering-a-domain-name">Registering a Domain Name</a></li><li class="depth-0"><a href="#domain-zone-and-records" data-for="domain-zone-and-records">Domain Zone and Records</a></li><li class="depth-0"><a href="#using-domains-and-dns-on-a-lan" data-for="using-domains-and-dns-on-a-lan">Using Domains and DNS on a LAN</a></li><li class="depth-0"><a href="#which-dns-server-does-my-computer-use" data-for="which-dns-server-does-my-computer-use">Which DNS server does my computer use?</a></li><li class="depth-0"><a href="#search-domains-and-local-dns-resolution-example" data-for="search-domains-and-local-dns-resolution-example">Search Domains and local DNS resolution example</a></li><li class="depth-0"><a href="#network-ad-blocking-pi-hole-example" data-for="network-ad-blocking-pi-hole-example">Network Ad-blocking (Pi-hole) Example</a></li><li class="depth-0"><a href="#dns-security" data-for="dns-security">DNS Security</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li><a href="../../../Homelab/Homelab" class="internal">Homelab</a></li></ul></div></div></div></div></body><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script type="module">function L(c){for(;c.firstChild;)c.removeChild(c.firstChild)}var h=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;ZOOM_SENSITIVITY=.001;setupEventListeners(){this.container.addEventListener("mousedown",this.onMouseDown.bind(this)),document.addEventListener("mousemove",this.onMouseMove.bind(this)),document.addEventListener("mouseup",this.onMouseUp.bind(this)),this.container.addEventListener("wheel",this.onWheel.bind(this),{passive:!1}),window.addEventListener("resize",this.resetTransform.bind(this))}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),s=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(s),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onWheel(e){e.preventDefault();let t=-e.deltaY*this.ZOOM_SENSITIVITY,n=Math.min(Math.max(this.scale+t,this.MIN_SCALE),this.MAX_SCALE),s=this.content.getBoundingClientRect(),r=e.clientX-s.left,i=e.clientY-s.top,o=n-this.scale;this.currentPan.x-=r*o,this.currentPan.y-=i*o,this.scale=n,this.updateTransform()}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),s=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=s*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1,this.currentPan={x:0,y:0},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],M;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;let t=T.reduce((r,i)=>(r[i]=getComputedStyle(document.documentElement).getPropertyValue(i),r),{});M||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let n=M.default,s=document.documentElement.getAttribute("saved-theme")==="dark";n.initialize({startOnLoad:!1,securityLevel:"loose",theme:s?"dark":"base",themeVariables:{fontFamily:t["--codeFont"],primaryColor:t["--light"],primaryTextColor:t["--darkgray"],primaryBorderColor:t["--tertiary"],lineColor:t["--darkgray"],secondaryColor:t["--secondary"],tertiaryColor:t["--tertiary"],clusterBkg:t["--light"],edgeLabelBackground:t["--highlight"]}}),await n.run({nodes:e});for(let r=0;r<e.length;r++){let E=function(){let d=a.querySelector("#mermaid-space"),u=a.querySelector(".mermaid-content");if(!u)return;L(u);let w=i.querySelector("svg").cloneNode(!0);u.appendChild(w),a.classList.add("active"),d.style.cursor="grab",y=new h(d,u)},m=function(){a.classList.remove("active"),y=null},f=function(d){d.key==="Escape"&&m()},i=e[r],o=i.parentElement,p=o.querySelector(".clipboard-button"),l=o.querySelector(".expand-button"),v=window.getComputedStyle(p),C=p.offsetWidth+parseFloat(v.marginLeft||"0")+parseFloat(v.marginRight||"0");l.style.right=`calc(${C}px + 0.3rem)`,o.prepend(l);let a=o.querySelector("#mermaid-container");if(!a)return;let y=null,g=a.querySelector(".close-button");g.addEventListener("click",m),l.addEventListener("click",E),document.addEventListener("keydown",f),window.addCleanup(()=>{g.removeEventListener("click",m),l.removeEventListener("click",E),document.removeEventListener("keydown",f)})}});
+</script><script src="../../../postscript.js" type="module"></script></html>
