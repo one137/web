@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Reverse Proxy</title>
-    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Reverse-Proxy</link>
-    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Reverse-Proxy</guid>
-    <description>A reverse proxy is a server that sits in front of internal services (such as web servers) and forwards client requests (e.g. from the internet) to them.</description>
-    <pubDate>Fri, 16 May 2025 09:47:16 GMT</pubDate>
+    <title>Welcome to one137</title>
+    <link>https://one137.dev/knowledge/</link>
+    <guid>https://one137.dev/knowledge/</guid>
+    <description>This is my repository of thoughts and learnings. A small subset of what I write in my Obsidian vault gets published here. At the moment, all the published content is about my Homelab: a self-hosting experiment to enjoy the IT services I need – for free and with full control – and, more importantly, to hack around and learn about IT infrastructure and related topics.</description>
+    <pubDate>Wed, 03 Sep 2025 21:08:24 GMT</pubDate>
   </item><item>
-    <title>ddclient</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/ddclient</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/ddclient</guid>
-    <description>Simple CLI DynDNS service. Setup github.com/linuxserver/docker-ddclient /srv/docker/volumes/ddclient/ddclient.conf: daemon=300 syslog=yes mail-failure=root pid=/var/run/ddclient/ddclient.pid ssl=yes use=web, web=ipify-ipv4 protocol=cloudflare, \ zone=one137.dev, \ ttl=1, \ login=token, \ password=&lt;password&gt; \ &lt;sub&gt;.one137.dev chmod 600 ddclient.conf Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-ddclient.yml.</description>
-    <pubDate>Fri, 16 May 2025 09:47:08 GMT</pubDate>
+    <title>Continuous Delivery</title>
+    <link>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</link>
+    <guid>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</guid>
+    <description>The goal is to implement the ubiquitous “push to deploy” – a simple continuous delivery mechanism that automatically redeploys a git repo when a commit is pushed to its master branch ...</description>
+    <pubDate>Wed, 03 Sep 2025 21:03:58 GMT</pubDate>
   </item><item>
-    <title>Cloudflare</title>
-    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Cloudflare</link>
-    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Cloudflare</guid>
-    <description>Quid Cloudflare is a technology company that provides a wide range of internet services focused on security, performance, and reliability. Here are the key aspects of what Cloudflare does: Content Delivery Network (CDN): Cloudflare operates a global network of data centers that cache and deliver website content to visitors from the nearest location, significantly improving loading speeds.</description>
-    <pubDate>Fri, 16 May 2025 09:46:55 GMT</pubDate>
+    <title>DNSMasq</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/DNSMasq</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/DNSMasq</guid>
+    <description>Dnsmasq provides DNS, DHCP, router advertisement and network boot for small networks infrastrutures. The DNS subsystem provides a local DNS server for the network, with forwarding of all query types to upstream recursive DNS servers and caching of common record types (A, AAAA, CNAME, etc).</description>
+    <pubDate>Wed, 03 Sep 2025 20:52:43 GMT</pubDate>
   </item><item>
-    <title>Homelab</title>
-    <link>https://one137.dev/knowledge/Homelab/Homelab</link>
-    <guid>https://one137.dev/knowledge/Homelab/Homelab</guid>
-    <description>Stuff to look into Logs monitoring: Prometheus + Grafana Traefik instead of NPM Build a comments section Install an AI platform ZFS replication Replace most of the config files by ...</description>
-    <pubDate>Fri, 16 May 2025 09:45:50 GMT</pubDate>
-  </item><item>
-    <title>Virtualization</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Virtualization</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Virtualization</guid>
-    <description>Hardware virtualization (VMs) Proxmox is currently used as the VM hypervisor. OS virtualization (containers) LXC or Docker Differences between VMs and Containers VMs provide full hardware virtualization.</description>
-    <pubDate>Fri, 16 May 2025 09:41:50 GMT</pubDate>
-  </item><item>
-    <title>2 – Domains and DNS</title>
-    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-%E2%80%93-Domains-and-DNS</link>
-    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-%E2%80%93-Domains-and-DNS</guid>
-    <description>DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ...</description>
-    <pubDate>Fri, 16 May 2025 09:25:18 GMT</pubDate>
-  </item><item>
-    <title>Watchtower</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Watchtower</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Watchtower</guid>
-    <description>TODO Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/60-watchtower.yml.</description>
-    <pubDate>Fri, 16 May 2025 09:03:36 GMT</pubDate>
-  </item><item>
-    <title>Pi-Hole</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
-    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
-    <pubDate>Mon, 03 Mar 2025 19:25:03 GMT</pubDate>
-  </item><item>
-    <title>Portainer</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
-    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
-    <pubDate>Mon, 03 Mar 2025 19:21:47 GMT</pubDate>
+    <title>Serve static files through NPM</title>
+    <link>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</link>
+    <guid>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</guid>
+    <description> Add Proxy Host one137.dev → http://STATIC_FILES:1 (name doesn’t matter) Activate Block Exploits and SSL as usual Note Access rules are not applied. If needed, they should go in the advanced tab under location /, for example (IPs should match those in Create Access List): allow 192.168.1.1/24; allow ip-of-wg-easy/32; allow ip-of-cloudflared/32; deny all; In Advanced tab, add (see Setup NPM for the logs, and X is the proxy number): location / { root /data/nginx/custom/one137-web; try_files $uri $uri.html $uri/ =404; access_log /data/logs/proxy-host-X_access.log default_plus_cf; # for fail2ban } Create static web files in dockerhost’s /srv/docker/volumes/one137-web bind /srv/docker/volumes/one137-web:/srv/docker/volumes/one137-web in NPM’s stack on dockerhost: sudo -u dockeruser ln -s /srv/docker/volumes/one137-web /srv/docker/volumes/npm/data/nginx/custom/one137-web See Continuous Delivery for automation.</description>
+    <pubDate>Wed, 03 Sep 2025 20:46:58 GMT</pubDate>
   </item><item>
     <title>Nginx Proxy Manager (NPM)</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
     <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
-    <pubDate>Sun, 23 Feb 2025 13:14:54 GMT</pubDate>
+    <pubDate>Wed, 03 Sep 2025 20:46:12 GMT</pubDate>
+  </item><item>
+    <title>fail2ban</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/fail2ban</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/fail2ban</guid>
+    <description>Security tool that monitors log files for suspicious activity (like repeated failed login attempts) and automatically blocks offending IP addresses for a specified period of time ...</description>
+    <pubDate>Wed, 03 Sep 2025 20:37:10 GMT</pubDate>
+  </item><item>
+    <title>Pi-Hole</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
+    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
+    <pubDate>Wed, 03 Sep 2025 20:22:16 GMT</pubDate>
+  </item><item>
+    <title>Wireguard</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Wireguard</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Wireguard</guid>
+    <description>WireGuard is a simple, fast, modern, general purpose VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, and considerably more performant than OpenVPN.</description>
+    <pubDate>Wed, 03 Sep 2025 20:03:30 GMT</pubDate>
+  </item><item>
+    <title>Transmission</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Transmission</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Transmission</guid>
+    <description>Setup Create TrueNAS dataset and share with SMB: “video” Add to /etc/fstab: //192.168.1.100/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount ...</description>
+    <pubDate>Wed, 03 Sep 2025 20:03:16 GMT</pubDate>
+  </item><item>
+    <title>Linux Systems Setup</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
+    <description>General (Debian) # As root sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install unattended-upgrades # configure auto-updates for long-term sys sudo dpkg-reconfigure ...</description>
+    <pubDate>Wed, 03 Sep 2025 19:20:31 GMT</pubDate>
   </item>
     </channel>
   </rss>
