@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Welcome to one137</title>
-    <link>https://one137.dev/knowledge/</link>
-    <guid>https://one137.dev/knowledge/</guid>
-    <description>This is my repository of thoughts and learnings. A small subset of what I write in my Obsidian vault gets published here. At the moment, all the published content is about my Homelab: a self-hosting experiment to enjoy the IT services I need – for free and with full control – and, more importantly, to hack around and learn about IT infrastructure and related topics.</description>
-    <pubDate>Wed, 03 Sep 2025 21:08:24 GMT</pubDate>
+    <title>Homelab Services</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</guid>
+    <description>Current list of services hosted Hosted on Docker unless specified. Pi-Hole (x2, once on Bare) Wireguard (server and client) DNSMasq (for Wireguard server) Cloudflared ddclient Jellyfin Mailrise MongoDB Transmission Diun Uptime-Kuma Nginx Proxy Manager (NPM) including web server Portainer Syncthing (on TrueNAS) fail2ban (on Bare) Programmable config name, host, proxy, protocol router, 192.168.137.1, http://router:80, - pihole1, 192.168.137.10, http://pihole1:80, - proxmox, 192.168.137.11, https://proxmox:8006, WS truenas, 192.168.137.12, http://truenas:80, WS dockerhost, 192.168.137.13, - jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing-dh, dockerhost, http://ct-syncthing:8384, - syncthing-tn, dockerhost, https://truenas:20910, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wireguard-easy, dockerhost, http://wireguard-easy:51821, - immich, dockerhost, http://immich_server:2283, WS mailrise, dockerhost, stream://ct-mailrise:8025, TCP mongodb, dockerhost, stream://ct-mongodb:27017, TCP wireguard-easy, dockerhost, stream://wireguard-easy:51820, UDP cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
+    <pubDate>Sat, 14 Mar 2026 19:34:24 GMT</pubDate>
   </item><item>
-    <title>Continuous Delivery</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</guid>
-    <description>The goal is to implement the ubiquitous “push to deploy” – a simple continuous delivery mechanism that automatically redeploys a git repo when a commit is pushed to its master branch ...</description>
-    <pubDate>Wed, 03 Sep 2025 21:03:58 GMT</pubDate>
+    <title>Network Shares</title>
+    <link>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</link>
+    <guid>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</guid>
+    <description>TrueNAS iSCSI SMB In TrueNAS Datasets: Add dataset Dataset Preset: SMB (Add to Proxmox) DC, Storage, Add, SMB/CIFS ID: e.g. truenas-proxmox Can check all content types Username “USER” / Password: TrueNAS’s “USER” user account On target system sudo apt install cifs-utils sudo mkdir /etc/samba/ sudo vim /etc/samba/truenas-sambaguest ### username=sambaguest password=*** ### sudo chmod 600 /etc/samba/truenas-sambaguest sudo mkdir /mnt/video-nas sudo vim /etc/fstab ### Add lines (IP address of TrueNAS) //truenas/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount 0 0 ### sudo mount /mnt/video-nas/ # to test If target system is a Synology NAS UI &gt; File Station &gt; Tools &gt; Mount remote folder &gt; CIFS Time Machine over SMB in TrueNAS In TrueNAS: System &gt; SMB &gt; Edit &gt; Advanced &gt; Enable Apple SMB2/3 Protocol Extensions Shares &gt; SMB &gt; (create or edit desired share) &gt; Purpose = Multi-user time machine In macOS: Connect to the share (Finder &gt; Cmd-K) Go to Settings &gt; Time Machine to add the share iSCSI See iSCSI NFS Note: SMB is more performant On NAS Share /mnt/main-pool/video as NFS Set “mapall user” and “mapall group” to “root” Note: probably better to change ownership of dataset to “USER” and mapall to “USER” Mounting shares from unprivileged LXC SMB is tricky if LXC is not privileged.</description>
+    <pubDate>Wed, 25 Feb 2026 14:33:58 GMT</pubDate>
   </item><item>
-    <title>DNSMasq</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/DNSMasq</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/DNSMasq</guid>
-    <description>Dnsmasq provides DNS, DHCP, router advertisement and network boot for small networks infrastrutures. The DNS subsystem provides a local DNS server for the network, with forwarding of all query types to upstream recursive DNS servers and caching of common record types (A, AAAA, CNAME, etc).</description>
-    <pubDate>Wed, 03 Sep 2025 20:52:43 GMT</pubDate>
-  </item><item>
-    <title>Serve static files through NPM</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</guid>
-    <description> Add Proxy Host one137.dev → http://STATIC_FILES:1 (name doesn’t matter) Activate Block Exploits and SSL as usual Note Access rules are not applied. If needed, they should go in the advanced tab under location /, for example (IPs should match those in Create Access List): allow 192.168.1.1/24; allow ip-of-wg-easy/32; allow ip-of-cloudflared/32; deny all; In Advanced tab, add (see Setup NPM for the logs, and X is the proxy number): location / { root /data/nginx/custom/one137-web; try_files $uri $uri.html $uri/ =404; access_log /data/logs/proxy-host-X_access.log default_plus_cf; # for fail2ban } Create static web files in dockerhost’s /srv/docker/volumes/one137-web bind /srv/docker/volumes/one137-web:/srv/docker/volumes/one137-web in NPM’s stack on dockerhost: sudo -u dockeruser ln -s /srv/docker/volumes/one137-web /srv/docker/volumes/npm/data/nginx/custom/one137-web See Continuous Delivery for automation.</description>
-    <pubDate>Wed, 03 Sep 2025 20:46:58 GMT</pubDate>
-  </item><item>
-    <title>Nginx Proxy Manager (NPM)</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
-    <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
-    <pubDate>Wed, 03 Sep 2025 20:46:12 GMT</pubDate>
-  </item><item>
-    <title>fail2ban</title>
-    <link>https://one137.dev/knowledge/Homelab/Security/fail2ban</link>
-    <guid>https://one137.dev/knowledge/Homelab/Security/fail2ban</guid>
-    <description>Security tool that monitors log files for suspicious activity (like repeated failed login attempts) and automatically blocks offending IP addresses for a specified period of time ...</description>
-    <pubDate>Wed, 03 Sep 2025 20:37:10 GMT</pubDate>
-  </item><item>
-    <title>Pi-Hole</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
-    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
-    <pubDate>Wed, 03 Sep 2025 20:22:16 GMT</pubDate>
+    <title>Portainer</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
+    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
+    <pubDate>Wed, 25 Feb 2026 14:33:33 GMT</pubDate>
   </item><item>
     <title>Wireguard</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Wireguard</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Wireguard</guid>
     <description>WireGuard is a simple, fast, modern, general purpose VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, and considerably more performant than OpenVPN.</description>
-    <pubDate>Wed, 03 Sep 2025 20:03:30 GMT</pubDate>
-  </item><item>
-    <title>Transmission</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Transmission</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Transmission</guid>
-    <description>Setup Create TrueNAS dataset and share with SMB: “video” Add to /etc/fstab: //192.168.1.100/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount ...</description>
-    <pubDate>Wed, 03 Sep 2025 20:03:16 GMT</pubDate>
+    <pubDate>Wed, 25 Feb 2026 14:23:37 GMT</pubDate>
   </item><item>
     <title>Linux Systems Setup</title>
     <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
     <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
     <description>General (Debian) # As root sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install unattended-upgrades # configure auto-updates for long-term sys sudo dpkg-reconfigure ...</description>
-    <pubDate>Wed, 03 Sep 2025 19:20:31 GMT</pubDate>
+    <pubDate>Wed, 25 Feb 2026 10:46:32 GMT</pubDate>
+  </item><item>
+    <title>Nginx Proxy Manager (NPM)</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
+    <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
+    <pubDate>Wed, 25 Feb 2026 10:42:34 GMT</pubDate>
+  </item><item>
+    <title>Serve static files through NPM</title>
+    <link>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</link>
+    <guid>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</guid>
+    <description> Add Proxy Host one137.dev → http://STATIC_FILES:1 (name doesn’t matter) Activate Block Exploits and SSL as usual Note Access rules are not applied. If needed, they should go in the advanced tab under location /, for example (IPs should match those in Create Access List): allow 192.168.137.1/24; allow ip-of-wg-easy/32; allow ip-of-cloudflared/32; deny all; In Advanced tab, add (see Setup NPM for the logs, and X is the proxy number): location / { root /data/nginx/custom/one137-web; try_files $uri $uri.html $uri/ =404; access_log /data/logs/proxy-host-X_access.log default_plus_cf; # for fail2ban } Create static web files in dockerhost’s /srv/docker/volumes/one137-web bind /srv/docker/volumes/one137-web:/srv/docker/volumes/one137-web in NPM’s stack on dockerhost: sudo -u dockeruser ln -s /srv/docker/volumes/one137-web /srv/docker/volumes/npm/data/nginx/custom/one137-web See Continuous Delivery for automation.</description>
+    <pubDate>Wed, 25 Feb 2026 10:42:02 GMT</pubDate>
+  </item><item>
+    <title>Proxmox</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</guid>
+    <description>Linux Systems Setup Quid Proxmox Virtual Environment (Proxmox VE or PVE) is a Virtualization platform designed for the provisioning of HCI (hyper-converged infrastructure: virtualized ...</description>
+    <pubDate>Wed, 25 Feb 2026 10:41:53 GMT</pubDate>
+  </item><item>
+    <title>Pi-Hole</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
+    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
+    <pubDate>Wed, 25 Feb 2026 10:31:47 GMT</pubDate>
+  </item><item>
+    <title>TrueNAS</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</guid>
+    <description>TrueNAS Scale is a network-attached storage (NAS) product produced by iXsystems. Based on the Open ZFS file system, it runs on Linux and is compatible with virtualization hosts such as Proxmox.</description>
+    <pubDate>Wed, 25 Feb 2026 09:10:09 GMT</pubDate>
   </item>
     </channel>
   </rss>
