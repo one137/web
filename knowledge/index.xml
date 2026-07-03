@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>Restic</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Restic</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Restic</guid>
+    <description>What restic.net A modern backup solution: effective – only transferring the parts that actually changed in the files you back up secure – by careful use of cryptography in every part ...</description>
+    <pubDate>Fri, 03 Jul 2026 08:46:13 GMT</pubDate>
+  </item><item>
     <title>Homelab Services</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</guid>
-    <description>Current list of services hosted Hosted on Docker unless specified. Pi-Hole (x2, once on Bare) Wireguard (server and client) DNSMasq (for Wireguard server) Cloudflared ddclient Jellyfin Mailrise MongoDB Transmission Diun Uptime-Kuma Nginx Proxy Manager (NPM) including web server Portainer Syncthing (on TrueNAS) fail2ban (on Bare) Programmable config name, host, proxy, protocol router, 192.168.137.1, http://router:80, - pihole1, 192.168.137.10, http://pihole1:80, - proxmox, 192.168.137.11, https://proxmox:8006, WS truenas, 192.168.137.12, http://truenas:80, WS dockerhost, 192.168.137.13, - jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing-dh, dockerhost, http://ct-syncthing:8384, - syncthing-tn, dockerhost, https://truenas:20910, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wireguard-easy, dockerhost, http://wireguard-easy:51821, - immich, dockerhost, http://immich_server:2283, WS mailrise, dockerhost, stream://ct-mailrise:8025, TCP mongodb, dockerhost, stream://ct-mongodb:27017, TCP wireguard-easy, dockerhost, stream://wireguard-easy:51820, UDP cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
-    <pubDate>Sat, 14 Mar 2026 19:34:24 GMT</pubDate>
+    <description>Current list of services hosted Hosted on Docker unless specified. Cloudflared ddclient Diun DNSMasq (for Wireguard server) fail2ban (on Bare) Immich Jellyfin Mailrise MongoDB Nginx Proxy Manager (NPM) including web server Pi-Hole (x2, once on Bare once on dockerhost) Portainer Restic Syncthing (x2, once on TrueNAS once on dockerhost) Transmission Uptime-Kuma Watchtower Wireguard (server and client) Programmable config name, host, proxy, protocol # Systems router, 192.168.137.1, http://router:80, - pihole1, 192.168.137.10, http://pihole1:80, - proxmox, 192.168.137.11, https://proxmox:8006, WS truenas, 192.168.137.12, http://truenas:80, WS dockerhost, 192.168.137.13, - # HTTP services on dockerhost immich, dockerhost, http://immich_server:2283, WS jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing-dh/dockerhost-st, dockerhost, http://ct-syncthing:8384, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wg-easy/wireguard-easy, dockerhost, http://ct-wireguard-easy:51821, - # HTTP services on truenas restic, truenas, http://truenas:30248, - syncthing-tn, truenas, https://truenas:20910, - # Stream services 8025, dockerhost, stream://ct-mailrise:8025, TCP 22000, dockerhost, stream://ct-syncthing:22000, TCP UDP 27017, dockerhost, stream://ct-mongodb:27017, TCP WG_PORT, dockerhost, stream://ct-wireguard-easy:WG_PORT, UDP # Services without inbound access through NPM cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - # Web one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
+    <pubDate>Fri, 03 Jul 2026 08:38:40 GMT</pubDate>
+  </item><item>
+    <title>Immich</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Immich</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Immich</guid>
+    <description>What immich.app Self-hosted photo and video management solution. Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease, without sacrificing your privacy.</description>
+    <pubDate>Fri, 03 Jul 2026 08:14:42 GMT</pubDate>
+  </item><item>
+    <title>Token Authenticators (Security Keys)</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</guid>
+    <description>Core Concepts Asymmetric Cryptography Foundation Security keys use public-key cryptography (private key never leaves device) Private key performs cryptographic operations; ...</description>
+    <pubDate>Wed, 01 Jul 2026 19:41:51 GMT</pubDate>
+  </item><item>
+    <title>Syncthing</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Syncthing</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Syncthing</guid>
+    <description>Setup Syncthing as TrueNAS App In TrueNAS Create syncthing dataset, type Generic (not samba!) Owner probably needs to be 1000:1000 or “apps” Add app UID GID 1000 or “apps” Config storage ...</description>
+    <pubDate>Sat, 06 Jun 2026 11:32:03 GMT</pubDate>
   </item><item>
     <title>Network Shares</title>
     <link>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</link>
     <guid>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</guid>
-    <description>TrueNAS iSCSI SMB In TrueNAS Datasets: Add dataset Dataset Preset: SMB (Add to Proxmox) DC, Storage, Add, SMB/CIFS ID: e.g. truenas-proxmox Can check all content types Username “USER” / Password: TrueNAS’s “USER” user account On target system sudo apt install cifs-utils sudo mkdir /etc/samba/ sudo vim /etc/samba/truenas-sambaguest ### username=sambaguest password=*** ### sudo chmod 600 /etc/samba/truenas-sambaguest sudo mkdir /mnt/video-nas sudo vim /etc/fstab ### Add lines (IP address of TrueNAS) //truenas/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount 0 0 ### sudo mount /mnt/video-nas/ # to test If target system is a Synology NAS UI &gt; File Station &gt; Tools &gt; Mount remote folder &gt; CIFS Time Machine over SMB in TrueNAS In TrueNAS: System &gt; SMB &gt; Edit &gt; Advanced &gt; Enable Apple SMB2/3 Protocol Extensions Shares &gt; SMB &gt; (create or edit desired share) &gt; Purpose = Multi-user time machine In macOS: Connect to the share (Finder &gt; Cmd-K) Go to Settings &gt; Time Machine to add the share iSCSI See iSCSI NFS Note: SMB is more performant On NAS Share /mnt/main-pool/video as NFS Set “mapall user” and “mapall group” to “root” Note: probably better to change ownership of dataset to “USER” and mapall to “USER” Mounting shares from unprivileged LXC SMB is tricky if LXC is not privileged.</description>
-    <pubDate>Wed, 25 Feb 2026 14:33:58 GMT</pubDate>
+    <description>TrueNAS iSCSI SMB In TrueNAS Datasets: Add dataset Dataset Preset: SMB (Add to Proxmox) DC, Storage, Add, SMB/CIFS ID: e.g. truenas-proxmox Can check all content types Username “USER” / Password: TrueNAS’s “USER” user account On target system sudo apt install cifs-utils sudo mkdir /etc/samba/ sudo vim /etc/samba/truenas-sambaguest ### username=sambaguest password=*** ### sudo chmod 600 /etc/samba/truenas-sambaguest sudo mkdir /mnt/video-nas sudo vim /etc/fstab ### Add lines //truenas/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount 0 0 ### sudo mount /mnt/video-nas/ # to test If target system is a Synology NAS UI &gt; File Station &gt; Tools &gt; Mount remote folder &gt; CIFS Time Machine over SMB in TrueNAS In TrueNAS: System &gt; SMB &gt; Edit &gt; Advanced &gt; Enable Apple SMB2/3 Protocol Extensions Shares &gt; SMB &gt; (create or edit desired share) &gt; Purpose = Multi-user time machine In macOS: Connect to the share (Finder &gt; Cmd-K) Go to Settings &gt; Time Machine to add the share iSCSI See iSCSI NFS Note: SMB is more performant On NAS Share /mnt/main-pool/video as NFS Set “mapall user” and “mapall group” to “root” Note: probably better to change ownership of dataset to “USER” and mapall to “USER” Mounting shares from unprivileged LXC SMB is tricky if LXC is not privileged.</description>
+    <pubDate>Sat, 06 Jun 2026 09:54:18 GMT</pubDate>
   </item><item>
-    <title>Portainer</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
-    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
-    <pubDate>Wed, 25 Feb 2026 14:33:33 GMT</pubDate>
+    <title>Encrypt-at-rest 2nd drive (cryptsetup)</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)</guid>
+    <description>Terminology TermWhat it isDrivePhysical hardware: /dev/nvme1n1, /dev/sdaPartitionA subdivision of a drive: /dev/nvme1n1p1. A drive can also be used whole, without partitions (as in this setup).DeviceKernel’s generic term for any block device — could be a drive, a partition, or a virtual one.</description>
+    <pubDate>Sat, 06 Jun 2026 09:39:10 GMT</pubDate>
   </item><item>
-    <title>Wireguard</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Wireguard</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Wireguard</guid>
-    <description>WireGuard is a simple, fast, modern, general purpose VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, and considerably more performant than OpenVPN.</description>
-    <pubDate>Wed, 25 Feb 2026 14:23:37 GMT</pubDate>
-  </item><item>
-    <title>Linux Systems Setup</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
-    <description>General (Debian) # As root sudo apt update &amp;&amp; sudo apt upgrade -y sudo apt install unattended-upgrades # configure auto-updates for long-term sys sudo dpkg-reconfigure ...</description>
-    <pubDate>Wed, 25 Feb 2026 10:46:32 GMT</pubDate>
-  </item><item>
-    <title>Nginx Proxy Manager (NPM)</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
-    <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
-    <pubDate>Wed, 25 Feb 2026 10:42:34 GMT</pubDate>
-  </item><item>
-    <title>Serve static files through NPM</title>
-    <link>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</link>
-    <guid>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</guid>
-    <description> Add Proxy Host one137.dev → http://STATIC_FILES:1 (name doesn’t matter) Activate Block Exploits and SSL as usual Note Access rules are not applied. If needed, they should go in the advanced tab under location /, for example (IPs should match those in Create Access List): allow 192.168.137.1/24; allow ip-of-wg-easy/32; allow ip-of-cloudflared/32; deny all; In Advanced tab, add (see Setup NPM for the logs, and X is the proxy number): location / { root /data/nginx/custom/one137-web; try_files $uri $uri.html $uri/ =404; access_log /data/logs/proxy-host-X_access.log default_plus_cf; # for fail2ban } Create static web files in dockerhost’s /srv/docker/volumes/one137-web bind /srv/docker/volumes/one137-web:/srv/docker/volumes/one137-web in NPM’s stack on dockerhost: sudo -u dockeruser ln -s /srv/docker/volumes/one137-web /srv/docker/volumes/npm/data/nginx/custom/one137-web See Continuous Delivery for automation.</description>
-    <pubDate>Wed, 25 Feb 2026 10:42:02 GMT</pubDate>
-  </item><item>
-    <title>Proxmox</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</guid>
-    <description>Linux Systems Setup Quid Proxmox Virtual Environment (Proxmox VE or PVE) is a Virtualization platform designed for the provisioning of HCI (hyper-converged infrastructure: virtualized ...</description>
-    <pubDate>Wed, 25 Feb 2026 10:41:53 GMT</pubDate>
-  </item><item>
-    <title>Pi-Hole</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</guid>
-    <description>Pi-Hole serves as a local DNS server. In particular, it acts as a DNS sinkhole to provide network-level ad and tracker blocking. It works by intercepting DNS requests from all devices on the network and blocking requests to known advertising and tracking domains, effectively stopping ads before they’re even downloaded.</description>
-    <pubDate>Wed, 25 Feb 2026 10:31:47 GMT</pubDate>
+    <title>BD790i Fan Control (Proxmox)</title>
+    <link>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</link>
+    <guid>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</guid>
+    <description>Tested on: MinisForum BD790i motherboard, Proxmox 6.8.12-18-pve, IT8613E Super IO ⇒ no mainline driver — use it87 with force_id workaround. Setup sensors apt update apt install lm-sensors sensors-detect Should find “Chip ITE IT8613E Super IO Sensors” but “Note: there is no driver for ITE IT8613E Super IO Sensors yet”.</description>
+    <pubDate>Tue, 02 Jun 2026 15:37:14 GMT</pubDate>
   </item><item>
     <title>TrueNAS</title>
     <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</link>
     <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</guid>
     <description>TrueNAS Scale is a network-attached storage (NAS) product produced by iXsystems. Based on the Open ZFS file system, it runs on Linux and is compatible with virtualization hosts such as Proxmox.</description>
-    <pubDate>Wed, 25 Feb 2026 09:10:09 GMT</pubDate>
+    <pubDate>Mon, 01 Jun 2026 12:24:05 GMT</pubDate>
+  </item><item>
+    <title>Proxmox</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</guid>
+    <description>Linux Systems Setup Quid Proxmox Virtual Environment (Proxmox VE or PVE) is a Virtualization platform designed for the provisioning of HCI (hyper-converged infrastructure: virtualized ...</description>
+    <pubDate>Mon, 01 Jun 2026 12:06:05 GMT</pubDate>
   </item>
     </channel>
   </rss>
