@@ -6,6 +6,48 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>Syncthing</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Syncthing</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Syncthing</guid>
+    <description>Setup Syncthing as TrueNAS App In TrueNAS Create syncthing dataset, type Generic (not samba!) Owner probably needs to be 1000:1000 or “apps” Add app UID GID 1000 or “apps” Config storage ...</description>
+    <pubDate>Tue, 04 Aug 2026 20:35:09 GMT</pubDate>
+  </item><item>
+    <title>Linux Systems Setup</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
+    <description>General (Debian) # As root, if no admin user created at install adduser USER &amp;&amp; usermod -aG sudo USER sudo -iu USER # As admin user sudo apt update &amp;&amp; sudo apt upgrade ...</description>
+    <pubDate>Fri, 17 Jul 2026 18:35:21 GMT</pubDate>
+  </item><item>
+    <title>Docker</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</guid>
+    <description>Setup in Debian VM VM Creation Create VM settings: Start at boot: Yes, Start order: order=2, up=30 to wait for TrueNAS’ shares Machine = 135, Disk = 64 GB CPU cores = 10, CPU type = x86-64-v4, ...</description>
+    <pubDate>Thu, 16 Jul 2026 11:01:41 GMT</pubDate>
+  </item><item>
+    <title>Bash, Vim config Reference</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference</guid>
+    <description>Usually use stow for this instead. Bash .bash_aliases alias ls=&#039;ls -F --color&#039; alias ll=&#039;ls -l&#039; alias l=&#039;ls -lh&#039; alias la=&#039;ls -A&#039; alias lla=&#039;ls -lA&#039; alias rm=&#039;rm -d&#039; alias bat=&quot;batcat&quot; alias cat=&#039;bat -p --paging=never&#039; alias less=&#039;bat -p --paging=always&#039; alias cpp=&quot;rsync -ah --progress&quot; cdd() { cd &quot;$1&quot; &amp;&amp; echo &quot;[[ $PWD ]]&quot; &amp;&amp; l | tail +2; } mvv() { mv &quot;$1&quot; &quot;$2&quot; &amp;&amp; cdd &quot;$2&quot;; } mkk() { mkdir &quot;$1&quot; &amp;&amp; cdd &quot;$1&quot;; } alias gl=&#039;git pull&#039; alias gp=&#039;git push&#039; alias gco=&#039;git checkout&#039; alias gst=&#039;git status&#039; alias gll=&#039;git log --graph&#039; alias gcam=&#039;git add -A &amp;&amp; git commit -vm&#039; alias sudo=&#039;sudo &#039; # trick for aliases to work with sudo .inputrc &quot;\e[A&quot;: history-search-backward &quot;\e[B&quot;: history-search-forward &quot;\C-v&quot;: &quot;\C-w\C-y\C-y&quot; vim mkdir -p ~/.vim/{swap,backups,undo} mv ~/.viminfo ~/.vim/ cat &gt; ~/.vimrc set mouse=a &quot; Enable mouse support in all modes set ssop-=options &quot; Don&#039;t save options and mappings in sessions set ssop-=folds &quot; Don&#039;t save folds in sessions set ignorecase &quot; Case-insensitive search set smartcase &quot; Use \C for force case-sensitivness when searching all lower-case set tabstop=4 &quot; Tab key width set shiftwidth=4 &quot; Indentation width set softtabstop=4 &quot; Backspace deletes X spaces set autoindent &quot; Copy indentation from previous line set incsearch &quot; Show search matches while typing set hlsearch &quot; Highlight search matches set scrolloff=4 &quot; Keep 4 lines visible above/below cursor set undofile &quot; Enable persistent undo set undolevels=1000 &quot; Maximum undo changes set undoreload=10000 &quot; Maximum lines for undo on reload set switchbuf=useopen &quot; Reuse existing windows when switching to a buffer set viminfo+=n~/.vim/viminfo set directory=~/.vim/swap// set backupdir=~/.vim/backups// set undodir=~/.vim/undo// set number relativenumber set colorcolumn=101 highlight LineNr ctermfg=darkgrey highlight ColorColumn ctermbg=black guibg=black filetype on syntax on let mapleader = &quot; &quot; &quot; Set spacebar as the leader key for custom mappings &quot; Shift-Tab unindents in insert mode inoremap &lt;S-Tab&gt; &lt;C-D&gt; &quot; NERDtree like setup for netrw let g:netrw_banner = 0 let g:netrw_liststyle = 3 let g:netrw_browse_split = 4 let g:netrw_altv = 1 let g:netrw_winsize = 25.</description>
+    <pubDate>Thu, 16 Jul 2026 09:35:11 GMT</pubDate>
+  </item><item>
+    <title>Token Authenticators (Security Keys)</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</guid>
+    <description>Core Concepts Asymmetric Cryptography Foundation Security keys use public-key cryptography (private key never leaves device) Private key performs cryptographic operations; ...</description>
+    <pubDate>Wed, 08 Jul 2026 06:46:10 GMT</pubDate>
+  </item><item>
+    <title>Portainer</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
+    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
+    <pubDate>Mon, 06 Jul 2026 07:35:51 GMT</pubDate>
+  </item><item>
+    <title>Homelab</title>
+    <link>https://one137.dev/knowledge/Homelab/Homelab</link>
+    <guid>https://one137.dev/knowledge/Homelab/Homelab</guid>
+    <description>Stuff to look into Logs monitoring: Prometheus + Grafana Traefik/Caddy instead of NPM Build a comments section Install an AI platform ZFS replication Replace most of the config files ...</description>
+    <pubDate>Fri, 03 Jul 2026 13:19:57 GMT</pubDate>
+  </item><item>
     <title>Restic</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Restic</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Restic</guid>
@@ -23,48 +65,6 @@
     <guid>https://one137.dev/knowledge/Homelab/Services/Immich</guid>
     <description>What immich.app Self-hosted photo and video management solution. Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease, without sacrificing your privacy.</description>
     <pubDate>Fri, 03 Jul 2026 08:14:42 GMT</pubDate>
-  </item><item>
-    <title>Token Authenticators (Security Keys)</title>
-    <link>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</guid>
-    <description>Core Concepts Asymmetric Cryptography Foundation Security keys use public-key cryptography (private key never leaves device) Private key performs cryptographic operations; ...</description>
-    <pubDate>Wed, 01 Jul 2026 19:41:51 GMT</pubDate>
-  </item><item>
-    <title>Syncthing</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Syncthing</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Syncthing</guid>
-    <description>Setup Syncthing as TrueNAS App In TrueNAS Create syncthing dataset, type Generic (not samba!) Owner probably needs to be 1000:1000 or “apps” Add app UID GID 1000 or “apps” Config storage ...</description>
-    <pubDate>Sat, 06 Jun 2026 11:32:03 GMT</pubDate>
-  </item><item>
-    <title>Network Shares</title>
-    <link>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</link>
-    <guid>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</guid>
-    <description>TrueNAS iSCSI SMB In TrueNAS Datasets: Add dataset Dataset Preset: SMB (Add to Proxmox) DC, Storage, Add, SMB/CIFS ID: e.g. truenas-proxmox Can check all content types Username “USER” / Password: TrueNAS’s “USER” user account On target system sudo apt install cifs-utils sudo mkdir /etc/samba/ sudo vim /etc/samba/truenas-sambaguest ### username=sambaguest password=*** ### sudo chmod 600 /etc/samba/truenas-sambaguest sudo mkdir /mnt/video-nas sudo vim /etc/fstab ### Add lines //truenas/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount 0 0 ### sudo mount /mnt/video-nas/ # to test If target system is a Synology NAS UI &gt; File Station &gt; Tools &gt; Mount remote folder &gt; CIFS Time Machine over SMB in TrueNAS In TrueNAS: System &gt; SMB &gt; Edit &gt; Advanced &gt; Enable Apple SMB2/3 Protocol Extensions Shares &gt; SMB &gt; (create or edit desired share) &gt; Purpose = Multi-user time machine In macOS: Connect to the share (Finder &gt; Cmd-K) Go to Settings &gt; Time Machine to add the share iSCSI See iSCSI NFS Note: SMB is more performant On NAS Share /mnt/main-pool/video as NFS Set “mapall user” and “mapall group” to “root” Note: probably better to change ownership of dataset to “USER” and mapall to “USER” Mounting shares from unprivileged LXC SMB is tricky if LXC is not privileged.</description>
-    <pubDate>Sat, 06 Jun 2026 09:54:18 GMT</pubDate>
-  </item><item>
-    <title>Encrypt-at-rest 2nd drive (cryptsetup)</title>
-    <link>https://one137.dev/knowledge/Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)</guid>
-    <description>Terminology TermWhat it isDrivePhysical hardware: /dev/nvme1n1, /dev/sdaPartitionA subdivision of a drive: /dev/nvme1n1p1. A drive can also be used whole, without partitions (as in this setup).DeviceKernel’s generic term for any block device — could be a drive, a partition, or a virtual one.</description>
-    <pubDate>Sat, 06 Jun 2026 09:39:10 GMT</pubDate>
-  </item><item>
-    <title>BD790i Fan Control (Proxmox)</title>
-    <link>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</guid>
-    <description>Tested on: MinisForum BD790i motherboard, Proxmox 6.8.12-18-pve, IT8613E Super IO ⇒ no mainline driver — use it87 with force_id workaround. Setup sensors apt update apt install lm-sensors sensors-detect Should find “Chip ITE IT8613E Super IO Sensors” but “Note: there is no driver for ITE IT8613E Super IO Sensors yet”.</description>
-    <pubDate>Tue, 02 Jun 2026 15:37:14 GMT</pubDate>
-  </item><item>
-    <title>TrueNAS</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</guid>
-    <description>TrueNAS Scale is a network-attached storage (NAS) product produced by iXsystems. Based on the Open ZFS file system, it runs on Linux and is compatible with virtualization hosts such as Proxmox.</description>
-    <pubDate>Mon, 01 Jun 2026 12:24:05 GMT</pubDate>
-  </item><item>
-    <title>Proxmox</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</guid>
-    <description>Linux Systems Setup Quid Proxmox Virtual Environment (Proxmox VE or PVE) is a Virtualization platform designed for the provisioning of HCI (hyper-converged infrastructure: virtualized ...</description>
-    <pubDate>Mon, 01 Jun 2026 12:06:05 GMT</pubDate>
   </item>
     </channel>
   </rss>
