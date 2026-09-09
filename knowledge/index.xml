@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Syncthing</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Syncthing</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Syncthing</guid>
-    <description>Setup Syncthing as TrueNAS App In TrueNAS Create syncthing dataset, type Generic (not samba!) Owner probably needs to be 1000:1000 or “apps” Add app UID GID 1000 or “apps” Config storage ...</description>
-    <pubDate>Tue, 04 Aug 2026 20:35:09 GMT</pubDate>
+    <title>Ollama</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Ollama</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Ollama</guid>
+    <description>Runs LLMs locally, exposing them through a simple API (and to any compatible frontend). ollama.com Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-ollama.yml CPU-only inference on the 7945HX, so the container is given generous limits (10G RAM, 22 CPUs) while staying otherwise locked down (read_only, cap_drop: ALL + SYS_NICE, no-new-privileges).</description>
+    <pubDate>Wed, 09 Sep 2026 14:09:23 GMT</pubDate>
+  </item><item>
+    <title>Clipse API</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Clipse-API</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Clipse-API</guid>
+    <description>Tiny custom API to push clipboard entries to the homelab from anywhere (mainly from iOS shortcuts), and read the latest one back. Entries are written to clipse’s history file, which lives in a Syncthing-synced folder, so anything sent to the API ends up in the clipboard history of my machines.</description>
+    <pubDate>Wed, 09 Sep 2026 14:05:03 GMT</pubDate>
   </item><item>
     <title>Linux Systems Setup</title>
     <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
     <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
     <description>General (Debian) # As root, if no admin user created at install adduser USER &amp;&amp; usermod -aG sudo USER sudo -iu USER # As admin user sudo apt update &amp;&amp; sudo apt upgrade ...</description>
-    <pubDate>Fri, 17 Jul 2026 18:35:21 GMT</pubDate>
-  </item><item>
-    <title>Docker</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</guid>
-    <description>Setup in Debian VM VM Creation Create VM settings: Start at boot: Yes, Start order: order=2, up=30 to wait for TrueNAS’ shares Machine = 135, Disk = 64 GB CPU cores = 10, CPU type = x86-64-v4, ...</description>
-    <pubDate>Thu, 16 Jul 2026 11:01:41 GMT</pubDate>
-  </item><item>
-    <title>Bash, Vim config Reference</title>
-    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference</link>
-    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference</guid>
-    <description>Usually use stow for this instead. Bash .bash_aliases alias ls=&#039;ls -F --color&#039; alias ll=&#039;ls -l&#039; alias l=&#039;ls -lh&#039; alias la=&#039;ls -A&#039; alias lla=&#039;ls -lA&#039; alias rm=&#039;rm -d&#039; alias bat=&quot;batcat&quot; alias cat=&#039;bat -p --paging=never&#039; alias less=&#039;bat -p --paging=always&#039; alias cpp=&quot;rsync -ah --progress&quot; cdd() { cd &quot;$1&quot; &amp;&amp; echo &quot;[[ $PWD ]]&quot; &amp;&amp; l | tail +2; } mvv() { mv &quot;$1&quot; &quot;$2&quot; &amp;&amp; cdd &quot;$2&quot;; } mkk() { mkdir &quot;$1&quot; &amp;&amp; cdd &quot;$1&quot;; } alias gl=&#039;git pull&#039; alias gp=&#039;git push&#039; alias gco=&#039;git checkout&#039; alias gst=&#039;git status&#039; alias gll=&#039;git log --graph&#039; alias gcam=&#039;git add -A &amp;&amp; git commit -vm&#039; alias sudo=&#039;sudo &#039; # trick for aliases to work with sudo .inputrc &quot;\e[A&quot;: history-search-backward &quot;\e[B&quot;: history-search-forward &quot;\C-v&quot;: &quot;\C-w\C-y\C-y&quot; vim mkdir -p ~/.vim/{swap,backups,undo} mv ~/.viminfo ~/.vim/ cat &gt; ~/.vimrc set mouse=a &quot; Enable mouse support in all modes set ssop-=options &quot; Don&#039;t save options and mappings in sessions set ssop-=folds &quot; Don&#039;t save folds in sessions set ignorecase &quot; Case-insensitive search set smartcase &quot; Use \C for force case-sensitivness when searching all lower-case set tabstop=4 &quot; Tab key width set shiftwidth=4 &quot; Indentation width set softtabstop=4 &quot; Backspace deletes X spaces set autoindent &quot; Copy indentation from previous line set incsearch &quot; Show search matches while typing set hlsearch &quot; Highlight search matches set scrolloff=4 &quot; Keep 4 lines visible above/below cursor set undofile &quot; Enable persistent undo set undolevels=1000 &quot; Maximum undo changes set undoreload=10000 &quot; Maximum lines for undo on reload set switchbuf=useopen &quot; Reuse existing windows when switching to a buffer set viminfo+=n~/.vim/viminfo set directory=~/.vim/swap// set backupdir=~/.vim/backups// set undodir=~/.vim/undo// set number relativenumber set colorcolumn=101 highlight LineNr ctermfg=darkgrey highlight ColorColumn ctermbg=black guibg=black filetype on syntax on let mapleader = &quot; &quot; &quot; Set spacebar as the leader key for custom mappings &quot; Shift-Tab unindents in insert mode inoremap &lt;S-Tab&gt; &lt;C-D&gt; &quot; NERDtree like setup for netrw let g:netrw_banner = 0 let g:netrw_liststyle = 3 let g:netrw_browse_split = 4 let g:netrw_altv = 1 let g:netrw_winsize = 25.</description>
-    <pubDate>Thu, 16 Jul 2026 09:35:11 GMT</pubDate>
-  </item><item>
-    <title>Token Authenticators (Security Keys)</title>
-    <link>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</guid>
-    <description>Core Concepts Asymmetric Cryptography Foundation Security keys use public-key cryptography (private key never leaves device) Private key performs cryptographic operations; ...</description>
-    <pubDate>Wed, 08 Jul 2026 06:46:10 GMT</pubDate>
-  </item><item>
-    <title>Portainer</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
-    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
-    <pubDate>Mon, 06 Jul 2026 07:35:51 GMT</pubDate>
-  </item><item>
-    <title>Homelab</title>
-    <link>https://one137.dev/knowledge/Homelab/Homelab</link>
-    <guid>https://one137.dev/knowledge/Homelab/Homelab</guid>
-    <description>Stuff to look into Logs monitoring: Prometheus + Grafana Traefik/Caddy instead of NPM Build a comments section Install an AI platform ZFS replication Replace most of the config files ...</description>
-    <pubDate>Fri, 03 Jul 2026 13:19:57 GMT</pubDate>
-  </item><item>
-    <title>Restic</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Restic</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Restic</guid>
-    <description>What restic.net A modern backup solution: effective – only transferring the parts that actually changed in the files you back up secure – by careful use of cryptography in every part ...</description>
-    <pubDate>Fri, 03 Jul 2026 08:46:13 GMT</pubDate>
+    <pubDate>Wed, 09 Sep 2026 13:53:01 GMT</pubDate>
   </item><item>
     <title>Homelab Services</title>
     <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</link>
     <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</guid>
-    <description>Current list of services hosted Hosted on Docker unless specified. Cloudflared ddclient Diun DNSMasq (for Wireguard server) fail2ban (on Bare) Immich Jellyfin Mailrise MongoDB Nginx Proxy Manager (NPM) including web server Pi-Hole (x2, once on Bare once on dockerhost) Portainer Restic Syncthing (x2, once on TrueNAS once on dockerhost) Transmission Uptime-Kuma Watchtower Wireguard (server and client) Programmable config name, host, proxy, protocol # Systems router, 192.168.137.1, http://router:80, - pihole1, 192.168.137.10, http://pihole1:80, - proxmox, 192.168.137.11, https://proxmox:8006, WS truenas, 192.168.137.12, http://truenas:80, WS dockerhost, 192.168.137.13, - # HTTP services on dockerhost immich, dockerhost, http://immich_server:2283, WS jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing-dh/dockerhost-st, dockerhost, http://ct-syncthing:8384, - transmission, dockerhost, http://ct-wireguard-client:9091, - uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wg-easy/wireguard-easy, dockerhost, http://ct-wireguard-easy:51821, - # HTTP services on truenas restic, truenas, http://truenas:30248, - syncthing-tn, truenas, https://truenas:20910, - # Stream services 8025, dockerhost, stream://ct-mailrise:8025, TCP 22000, dockerhost, stream://ct-syncthing:22000, TCP UDP 27017, dockerhost, stream://ct-mongodb:27017, TCP WG_PORT, dockerhost, stream://ct-wireguard-easy:WG_PORT, UDP # Services without inbound access through NPM cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - # Web one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
-    <pubDate>Fri, 03 Jul 2026 08:38:40 GMT</pubDate>
+    <description>Current list of services hosted Hosted on Docker unless specified. Clipse API Cloudflared ddclient Diun DNSMasq (for Wireguard server) Dufs fail2ban (on Bare) Immich Jellyfin Mailrise MongoDB Nginx Proxy Manager (NPM) including web server Ollama Pi-Hole (x2, once on Bare once on dockerhost) Portainer Restic Syncthing (x2, once on TrueNAS once on dockerhost) Transmission UpSnap Uptime-Kuma Watchtower Wireguard (server and client) Programmable config name, host, proxy, protocol # Systems router, 192.168.137.1, http://router:80, - pihole1, 192.168.137.10, http://pihole1:80, - proxmox, 192.168.137.11, https://proxmox:8006, WS truenas, 192.168.137.12, http://truenas:80, WS dockerhost, 192.168.137.13, - # HTTP services on dockerhost clipse, dockerhost, http://ct-clipse-api:8080, - dufs/files, dockerhost, http://ct-dufs:5000, - immich, dockerhost, http://immich_server:2283, WS jellyfin, dockerhost, http://ct-jellyfin:8096, WS npm, dockerhost, http://ct-npm:81, - pihole2, dockerhost, http://ct-pihole:80, - portainer, dockerhost, https://ct-portainer:9443, - syncthing-dh/dockerhost-st, dockerhost, http://ct-syncthing:8384, - transmission, dockerhost, http://ct-transmission:9091, - upsnap, dockerhost, http://172.17.0.1:8090, - # host network, so no container name uptime-kuma, dockerhost, http://ct-uptime-kuma:3001, - wg-easy/wireguard-easy, dockerhost, http://ct-wireguard-easy:51821, - # HTTP services on truenas restic, truenas, http://truenas:30248, - syncthing-tn, truenas, https://truenas:20910, - # Stream services 8025, dockerhost, stream://ct-mailrise:8025, TCP 22000, dockerhost, stream://ct-syncthing:22000, TCP UDP 27017, dockerhost, stream://ct-mongodb:27017, TCP WG_PORT, dockerhost, stream://ct-wireguard-easy:WG_PORT, UDP # Services with a published host port (not proxied through NPM) ollama, dockerhost, http://127.0.0.1:11434, - # loopback-only; containers use ct-ollama:11434 # Services without inbound access through NPM cloudflared, dockerhost, -, - ddclient, dockerhost, -, - diun, dockerhost, -, - dnsmasq-wireguard, dockerhost, -, - wireguard-client, dockerhost, -, - # Web one137, dockerhost, http://STATIC_FILES:1, - See Services and network layout (not public).</description>
+    <pubDate>Wed, 09 Sep 2026 13:31:10 GMT</pubDate>
   </item><item>
-    <title>Immich</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Immich</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Immich</guid>
-    <description>What immich.app Self-hosted photo and video management solution. Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease, without sacrificing your privacy.</description>
-    <pubDate>Fri, 03 Jul 2026 08:14:42 GMT</pubDate>
+    <title>fail2ban</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/fail2ban</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/fail2ban</guid>
+    <description>Security tool that monitors log files for suspicious activity (like repeated failed login attempts) and automatically blocks offending IP addresses for a specified period of time ...</description>
+    <pubDate>Wed, 09 Sep 2026 09:43:58 GMT</pubDate>
+  </item><item>
+    <title>UpSnap</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/UpSnap</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/UpSnap</guid>
+    <description>Wake-on-LAN web app, built on PocketBase. Scans the LAN for devices, then powers them on (WOL magic packets) or off (over ssh), from a UI or a cron schedule.</description>
+    <pubDate>Wed, 09 Sep 2026 08:56:55 GMT</pubDate>
+  </item><item>
+    <title>Cloudflared</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Cloudflared</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Cloudflared</guid>
+    <description>Command-line daemon that creates secure tunnels between local services and Cloudflare’s edge network, allowing to expose local applications to the internet without opening inbound ...</description>
+    <pubDate>Wed, 09 Sep 2026 08:48:31 GMT</pubDate>
+  </item><item>
+    <title>Dufs</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Dufs</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Dufs</guid>
+    <description>Minimal static file server with upload, delete, search and WebDAV support. Handy to share files over http(s) without setting up a share. github.com/sigoden/dufs Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-dufs.yml Files are served from /srv/docker/volumes/dufs/data.</description>
+    <pubDate>Wed, 09 Sep 2026 08:02:57 GMT</pubDate>
+  </item><item>
+    <title>Network Shares</title>
+    <link>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</link>
+    <guid>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</guid>
+    <description>TrueNAS iSCSI SMB In TrueNAS Datasets: Add dataset Dataset Preset: SMB (Add to Proxmox) DC, Storage, Add, SMB/CIFS ID: e.g. truenas-proxmox Can check all content types Username “USER” / Password: TrueNAS’s “USER” user account On target system sudo apt install cifs-utils sudo mkdir /etc/samba/ sudo vim /etc/samba/truenas-sambaguest ### username=sambaguest password=*** ### sudo chmod 600 /etc/samba/truenas-sambaguest sudo mkdir /mnt/video-nas sudo vim /etc/fstab ### Add lines //truenas/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount 0 0 ### sudo mount /mnt/video-nas/ # to test If target system is a Synology NAS UI &gt; File Station &gt; Tools &gt; Mount remote folder &gt; CIFS Time Machine over SMB in TrueNAS In TrueNAS: System &gt; SMB &gt; Edit &gt; Advanced &gt; Enable Apple SMB2/3 Protocol Extensions Shares &gt; SMB &gt; (create or edit desired share) &gt; Purpose = Multi-user time machine In macOS: Connect to the share (Finder &gt; Cmd-K) Go to Settings &gt; Time Machine to add the share WebDAV On arch, an easy to use WebDAV shares is with package gvfs-dnssd (“Virtual filesystem implementation for GIO - DNS-SD and WebDAV backend”).</description>
+    <pubDate>Wed, 09 Sep 2026 07:07:07 GMT</pubDate>
+  </item><item>
+    <title>Transmission</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Transmission</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Transmission</guid>
+    <description>Setup Create TrueNAS dataset and share with SMB: “video” Add to /etc/fstab: //192.168.137.12/video /mnt/video-nas cifs credentials=/etc/samba/truenas-sambaguest,uid=1001,gid=1001,file_mode=0664,dir_mode=0775,x-systemd.automount ...</description>
+    <pubDate>Tue, 08 Sep 2026 20:21:53 GMT</pubDate>
   </item>
     </channel>
   </rss>

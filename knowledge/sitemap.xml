@@ -1,12 +1,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
     <loc>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</loc>
-    <lastmod>2026-06-02T15:37:14.524Z</lastmod>
+    <lastmod>2026-06-02T15:37:14.523Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Hardware/Specs</loc>
     <lastmod>2025-01-29T19:20:56.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Homelab</loc>
-    <lastmod>2026-07-03T13:19:57.056Z</lastmod>
+    <lastmod>2026-07-03T13:19:57.055Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Cloudflare</loc>
     <lastmod>2025-05-16T09:46:55.000Z</lastmod>
@@ -27,13 +27,13 @@
     <lastmod>2025-09-03T12:38:15.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference</loc>
-    <lastmod>2026-07-16T09:35:11.446Z</lastmod>
+    <lastmod>2026-07-16T09:35:11.445Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Debian</loc>
     <lastmod>2025-09-03T12:38:15.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</loc>
-    <lastmod>2026-07-16T11:01:41.991Z</lastmod>
+    <lastmod>2026-07-16T11:01:41.990Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Kali-Linux</loc>
     <lastmod>2025-02-04T13:31:51.000Z</lastmod>
@@ -42,10 +42,10 @@
     <lastmod>2024-11-24T13:36:55.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</loc>
-    <lastmod>2026-07-17T18:35:21.586Z</lastmod>
+    <lastmod>2026-09-09T13:53:01.752Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</loc>
-    <lastmod>2026-06-01T12:06:05.317Z</lastmod>
+    <lastmod>2026-06-01T12:06:05.316Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access</loc>
     <lastmod>2025-02-04T13:35:19.000Z</lastmod>
@@ -63,7 +63,7 @@
     <lastmod>2025-09-03T21:03:58.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Obsidian-Vault-to-Wiki</loc>
-    <lastmod>2025-02-04T14:10:48.000Z</lastmod>
+    <lastmod>2026-09-08T19:54:15.318Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Public-Website</loc>
     <lastmod>2025-02-04T14:36:23.000Z</lastmod>
@@ -81,19 +81,25 @@
     <lastmod>2025-01-12T07:55:04.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</loc>
-    <lastmod>2026-07-08T06:46:10.612Z</lastmod>
+    <lastmod>2026-07-08T06:46:10.611Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/fail2ban</loc>
-    <lastmod>2025-09-03T20:37:10.000Z</lastmod>
+    <lastmod>2026-09-09T09:43:58.626Z</lastmod>
+  </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Services/Clipse-API</loc>
+    <lastmod>2026-09-09T14:05:03.331Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Cloudflared</loc>
-    <lastmod>2025-02-23T13:10:24.000Z</lastmod>
+    <lastmod>2026-09-09T08:48:31.690Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/DNSMasq</loc>
     <lastmod>2025-09-03T20:52:43.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Diun</loc>
     <lastmod>2025-02-23T13:13:17.000Z</lastmod>
+  </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Services/Dufs</loc>
+    <lastmod>2026-09-09T08:02:57.464Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Healthchecks</loc>
     <lastmod>2025-01-10T20:46:24.000Z</lastmod>
@@ -102,10 +108,10 @@
     <lastmod>2025-01-12T22:38:59.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</loc>
-    <lastmod>2026-07-03T08:38:40.263Z</lastmod>
+    <lastmod>2026-09-09T13:31:10.881Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Immich</loc>
-    <lastmod>2026-07-03T08:14:42.576Z</lastmod>
+    <lastmod>2026-07-03T08:14:42.575Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Jellyfin</loc>
     <lastmod>2025-10-27T08:28:09.000Z</lastmod>
@@ -119,6 +125,9 @@
     <loc>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</loc>
     <lastmod>2026-02-25T10:42:34.000Z</lastmod>
   </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Services/Ollama</loc>
+    <lastmod>2026-09-09T14:09:23.480Z</lastmod>
+  </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</loc>
     <lastmod>2026-06-01T09:50:52.459Z</lastmod>
   </url><url>
@@ -126,13 +135,16 @@
     <lastmod>2026-07-06T07:35:51.043Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Restic</loc>
-    <lastmod>2026-07-03T08:46:13.333Z</lastmod>
+    <lastmod>2026-07-03T08:46:13.332Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Syncthing</loc>
     <lastmod>2026-08-04T20:35:09.345Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Transmission</loc>
-    <lastmod>2026-02-25T09:09:54.000Z</lastmod>
+    <lastmod>2026-09-08T20:21:53.109Z</lastmod>
+  </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Services/UpSnap</loc>
+    <lastmod>2026-09-09T08:56:55.128Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</loc>
     <lastmod>2025-02-23T13:13:35.000Z</lastmod>
@@ -153,7 +165,7 @@
     <lastmod>2024-11-24T13:07:10.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Storage/Network-Shares</loc>
-    <lastmod>2026-06-06T09:54:18.892Z</lastmod>
+    <lastmod>2026-09-09T07:07:07.364Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Storage/PCIe</loc>
     <lastmod>2024-11-17T10:46:45.000Z</lastmod>
