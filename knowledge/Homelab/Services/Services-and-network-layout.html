@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en"><head><title>Services and network layout</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains Mono&amp;family=Open Sans:wght@400;700&amp;family=Open Sans:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="one137"/><meta property="og:title" content="Services and network layout"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Services and network layout"/><meta name="twitter:description" content="Four questions: how a request gets in, what deliberately does not go through the front door, where the machines and the bytes are, and how a failure gets noticed ..."/><meta property="og:description" content="Four questions: how a request gets in, what deliberately does not go through the front door, where the machines and the bytes are, and how a failure gets noticed ..."/><meta property="og:image:type" content="image/webp"/><meta property="og:image:alt" content="Four questions: how a request gets in, what deliberately does not go through the front door, where the machines and the bytes are, and how a failure gets noticed ..."/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image:url" content="https://one137.dev/knowledge/static/og-image.png"/><meta name="twitter:image" content="https://one137.dev/knowledge/static/og-image.png"/><meta property="og:image" content="https://one137.dev/knowledge/static/og-image.png"/><meta property="twitter:domain" content="one137.dev/knowledge"/><meta property="og:url" content="https://one137.dev/knowledge/Homelab/Services/Services-and-network-layout"/><meta property="twitter:url" content="https://one137.dev/knowledge/Homelab/Services/Services-and-network-layout"/><link rel="icon" href="../../static/icon.png"/><meta name="description" content="Four questions: how a request gets in, what deliberately does not go through the front door, where the machines and the bytes are, and how a failure gets noticed ..."/><meta name="generator" content="Quartz"/><link href="../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  display: grid;
+  width: 90%;
+  height: 90vh;
+  margin: 5vh auto;
+  background: var(--light);
+  box-shadow: 0 14px 50px rgba(27, 33, 48, 0.12), 0 10px 30px rgba(27, 33, 48, 0.16);
+  overflow: hidden;
+  position: relative;
+}
+#mermaid-container > #mermaid-space > .mermaid-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-bottom: 1px solid var(--lightgray);
+  background: var(--light);
+  z-index: 2;
+  max-height: fit-content;
+}
+#mermaid-container > #mermaid-space > .mermaid-header > .close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--darkgray);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-header > .close-button:hover {
+  background: var(--lightgray);
+  color: var(--dark);
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvZG9yYW4vRG9jdW1lbnRzL0NvZGUvb25lMTM3L3F1YXJ0ei9xdWFydHovY29tcG9uZW50cy9zdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0EsWUFDRTtFQUVGO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBS047RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBkaXNwbGF5OiBncmlkO1xuICAgIHdpZHRoOiA5MCU7XG4gICAgaGVpZ2h0OiA5MHZoO1xuICAgIG1hcmdpbjogNXZoIGF1dG87XG4gICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgIGJveC1zaGFkb3c6XG4gICAgICAwIDE0cHggNTBweCByZ2JhKDI3LCAzMywgNDgsIDAuMTIpLFxuICAgICAgMCAxMHB4IDMwcHggcmdiYSgyNywgMzMsIDQ4LCAwLjE2KTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcblxuICAgICYgPiAubWVybWFpZC1oZWFkZXIge1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gICAgICBwYWRkaW5nOiAxcmVtO1xuICAgICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICB6LWluZGV4OiAyO1xuICAgICAgbWF4LWhlaWdodDogZml0LWNvbnRlbnQ7XG5cbiAgICAgICYgPiAuY2xvc2UtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmtncmF5KTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRlbnQge1xuICAgICAgcGFkZGluZzogMnJlbTtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><script src="../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="Homelab/Services/Services-and-network-layout"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../..">one137</a></h2><div class="spacer mobile-only"></div><div class="search"><button class="search-button" id="search-button"><p>Search</p><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg></button><div id="search-container"><div id="search-space"><input autocomplete="off" id="search-bar" name="search" type="text" aria-label="Search for something" placeholder="Search for something"/><div id="search-layout" data-preview="true"></div></div></div></div><div><span>Theme:  </span><button class="darkmode" id="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Dark mode"><title>Dark mode</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Light mode"><title>Light mode</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div class="explorer desktop-only"><button type="button" id="explorer" data-behavior="collapse" data-collapsed="collapsed" data-savestate="true" data-tree="[{&quot;path&quot;:&quot;Homelab&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Hardware&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Internet-Infrastructure&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Internet-Infrastructure/Introductory-presentation&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/OS-and-Virtualization&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Public-website&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Security&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Services&quot;,&quot;collapsed&quot;:true},{&quot;path&quot;:&quot;Homelab/Storage&quot;,&quot;collapsed&quot;:true}]" aria-controls="explorer-content" aria-expanded="false"><h2>Explorer</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-content"><ul class="overflow" id="explorer-ul"><li><div class="folder-outer open"><ul style="padding-left:0;" class="content" data-folderul><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab"><button class="folder-button"><span class="folder-title">Homelab</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Hardware"><button class="folder-button"><span class="folder-title">Hardware</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Hardware"><li><a href="../../Homelab/Hardware/BD790i-Fan-Control-(Proxmox)" data-for="Homelab/Hardware/BD790i-Fan-Control-(Proxmox)">BD790i Fan Control (Proxmox)</a></li><li><a href="../../Homelab/Hardware/Specs" data-for="Homelab/Hardware/Specs">Specs</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Internet-Infrastructure"><button class="folder-button"><span class="folder-title">Internet Infrastructure</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Internet-Infrastructure"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Internet-Infrastructure/Introductory-presentation"><button class="folder-button"><span class="folder-title">Introductory presentation</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Internet-Infrastructure/Introductory-presentation"><li><a href="../../Homelab/Internet-Infrastructure/Introductory-presentation/1-–-IP,-Routes,-Subnets" data-for="Homelab/Internet-Infrastructure/Introductory-presentation/1-–-IP,-Routes,-Subnets">1 – IP, Routes, Subnets</a></li><li><a href="../../Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS" data-for="Homelab/Internet-Infrastructure/Introductory-presentation/2-–-Domains-and-DNS">2 – Domains and DNS</a></li></ul></div></li><li><a href="../../Homelab/Internet-Infrastructure/Cloudflare" data-for="Homelab/Internet-Infrastructure/Cloudflare">Cloudflare</a></li><li><a href="../../Homelab/Internet-Infrastructure/Forward-Proxy" data-for="Homelab/Internet-Infrastructure/Forward-Proxy">Forward Proxy</a></li><li><a href="../../Homelab/Internet-Infrastructure/Reverse-Proxy" data-for="Homelab/Internet-Infrastructure/Reverse-Proxy">Reverse Proxy</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/OS-and-Virtualization"><button class="folder-button"><span class="folder-title">OS and Virtualization</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/OS-and-Virtualization"><li><a href="../../Homelab/OS-and-Virtualization/Alpine-(Distro)" data-for="Homelab/OS-and-Virtualization/Alpine-(Distro)">Alpine (Distro)</a></li><li><a href="../../Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference" data-for="Homelab/OS-and-Virtualization/Bash,-Vim-config-Reference">Bash, Vim config Reference</a></li><li><a href="../../Homelab/OS-and-Virtualization/Debian" data-for="Homelab/OS-and-Virtualization/Debian">Debian</a></li><li><a href="../../Homelab/OS-and-Virtualization/Docker" data-for="Homelab/OS-and-Virtualization/Docker">Docker</a></li><li><a href="../../Homelab/OS-and-Virtualization/Kali-Linux" data-for="Homelab/OS-and-Virtualization/Kali-Linux">Kali Linux</a></li><li><a href="../../Homelab/OS-and-Virtualization/Linux-Systems-Setup" data-for="Homelab/OS-and-Virtualization/Linux-Systems-Setup">Linux Systems Setup</a></li><li><a href="../../Homelab/OS-and-Virtualization/LXC" data-for="Homelab/OS-and-Virtualization/LXC">LXC</a></li><li><a href="../../Homelab/OS-and-Virtualization/Proxmox" data-for="Homelab/OS-and-Virtualization/Proxmox">Proxmox</a></li><li><a href="../../Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access" data-for="Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access">Remote Graphical OS Access</a></li><li><a href="../../Homelab/OS-and-Virtualization/TrueNAS" data-for="Homelab/OS-and-Virtualization/TrueNAS">TrueNAS</a></li><li><a href="../../Homelab/OS-and-Virtualization/Virtualization" data-for="Homelab/OS-and-Virtualization/Virtualization">Virtualization</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Public-website"><button class="folder-button"><span class="folder-title">Public website</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Public-website"><li><a href="../../Homelab/Public-website/Comments-API" data-for="Homelab/Public-website/Comments-API">Comments API</a></li><li><a href="../../Homelab/Public-website/Continuous-Delivery" data-for="Homelab/Public-website/Continuous-Delivery">Continuous Delivery</a></li><li><a href="../../Homelab/Public-website/Obsidian-Vault-to-Wiki" data-for="Homelab/Public-website/Obsidian-Vault-to-Wiki">Obsidian Vault to Wiki</a></li><li><a href="../../Homelab/Public-website/Public-Website" data-for="Homelab/Public-website/Public-Website">Public Website</a></li><li><a href="../../Homelab/Public-website/Serve-static-files-through-NPM" data-for="Homelab/Public-website/Serve-static-files-through-NPM">Serve static files through NPM</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Security"><button class="folder-button"><span class="folder-title">Security</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Security"><li><a href="../../Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)" data-for="Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)">Encrypt-at-rest 2nd drive (cryptsetup)</a></li><li><a href="../../Homelab/Security/fail2ban" data-for="Homelab/Security/fail2ban">fail2ban</a></li><li><a href="../../Homelab/Security/Homelab-Security" data-for="Homelab/Security/Homelab-Security">Homelab Security</a></li><li><a href="../../Homelab/Security/Security---Cryptography" data-for="Homelab/Security/Security---Cryptography">Security - Cryptography</a></li><li><a href="../../Homelab/Security/Token-Authenticators-(Security-Keys)" data-for="Homelab/Security/Token-Authenticators-(Security-Keys)">Token Authenticators (Security Keys)</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Services"><button class="folder-button"><span class="folder-title">Services</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Services"><li><a href="../../Homelab/Services/Clipse-API" data-for="Homelab/Services/Clipse-API">Clipse API</a></li><li><a href="../../Homelab/Services/Cloudflared" data-for="Homelab/Services/Cloudflared">Cloudflared</a></li><li><a href="../../Homelab/Services/ddclient" data-for="Homelab/Services/ddclient">ddclient</a></li><li><a href="../../Homelab/Services/Diun" data-for="Homelab/Services/Diun">Diun</a></li><li><a href="../../Homelab/Services/DNSMasq" data-for="Homelab/Services/DNSMasq">DNSMasq</a></li><li><a href="../../Homelab/Services/Dufs" data-for="Homelab/Services/Dufs">Dufs</a></li><li><a href="../../Homelab/Services/Healthchecks" data-for="Homelab/Services/Healthchecks">Healthchecks</a></li><li><a href="../../Homelab/Services/Homelab-Networking" data-for="Homelab/Services/Homelab-Networking">Homelab Networking</a></li><li><a href="../../Homelab/Services/Homelab-Services" data-for="Homelab/Services/Homelab-Services">Homelab Services</a></li><li><a href="../../Homelab/Services/Immich" data-for="Homelab/Services/Immich">Immich</a></li><li><a href="../../Homelab/Services/Jellyfin" data-for="Homelab/Services/Jellyfin">Jellyfin</a></li><li><a href="../../Homelab/Services/Mailrise" data-for="Homelab/Services/Mailrise">Mailrise</a></li><li><a href="../../Homelab/Services/MongoDB" data-for="Homelab/Services/MongoDB">MongoDB</a></li><li><a href="../../Homelab/Services/Nginx-Proxy-Manager-(NPM)" data-for="Homelab/Services/Nginx-Proxy-Manager-(NPM)">Nginx Proxy Manager (NPM)</a></li><li><a href="../../Homelab/Services/Ollama" data-for="Homelab/Services/Ollama">Ollama</a></li><li><a href="../../Homelab/Services/Pi-Hole" data-for="Homelab/Services/Pi-Hole">Pi-Hole</a></li><li><a href="../../Homelab/Services/Portainer" data-for="Homelab/Services/Portainer">Portainer</a></li><li><a href="../../Homelab/Services/Radicale" data-for="Homelab/Services/Radicale">Radicale</a></li><li><a href="../../Homelab/Services/Restic" data-for="Homelab/Services/Restic">Restic</a></li><li><a href="../../Homelab/Services/Services-and-network-layout" data-for="Homelab/Services/Services-and-network-layout">Services and network layout</a></li><li><a href="../../Homelab/Services/Syncthing" data-for="Homelab/Services/Syncthing">Syncthing</a></li><li><a href="../../Homelab/Services/Transmission" data-for="Homelab/Services/Transmission">Transmission</a></li><li><a href="../../Homelab/Services/UpSnap" data-for="Homelab/Services/UpSnap">UpSnap</a></li><li><a href="../../Homelab/Services/Uptime-Kuma" data-for="Homelab/Services/Uptime-Kuma">Uptime-Kuma</a></li><li><a href="../../Homelab/Services/Watchtower" data-for="Homelab/Services/Watchtower">Watchtower</a></li><li><a href="../../Homelab/Services/Wireguard" data-for="Homelab/Services/Wireguard">Wireguard</a></li></ul></div></li><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div data-folderpath="Homelab/Storage"><button class="folder-button"><span class="folder-title">Storage</span></button></div></div><div class="folder-outer "><ul style="padding-left:1.4rem;" class="content" data-folderul="Homelab/Storage"><li><a href="../../Homelab/Storage/iSCSI" data-for="Homelab/Storage/iSCSI">iSCSI</a></li><li><a href="../../Homelab/Storage/NAS-Data-Protection" data-for="Homelab/Storage/NAS-Data-Protection">NAS Data Protection</a></li><li><a href="../../Homelab/Storage/Network-Shares" data-for="Homelab/Storage/Network-Shares">Network Shares</a></li><li><a href="../../Homelab/Storage/NVMe" data-for="Homelab/Storage/NVMe">NVMe</a></li><li><a href="../../Homelab/Storage/PCIe" data-for="Homelab/Storage/PCIe">PCIe</a></li><li><a href="../../Homelab/Storage/SATA" data-for="Homelab/Storage/SATA">SATA</a></li><li><a href="../../Homelab/Storage/SCSI" data-for="Homelab/Storage/SCSI">SCSI</a></li><li><a href="../../Homelab/Storage/SCSI-vs-NVMe-vs-AHCI-(SATA)" data-for="Homelab/Storage/SCSI-vs-NVMe-vs-AHCI-(SATA)">SCSI vs NVMe vs AHCI (SATA)</a></li><li><a href="../../Homelab/Storage/XFS" data-for="Homelab/Storage/XFS">XFS</a></li><li><a href="../../Homelab/Storage/ZFS" data-for="Homelab/Storage/ZFS">ZFS</a></li><li><a href="../../Homelab/Storage/ZFS-Dataset--and--Zvol" data-for="Homelab/Storage/ZFS-Dataset--and--Zvol">ZFS Dataset &amp; Zvol</a></li><li><a href="../../Homelab/Storage/ZFS-VDEV--and--Storage" data-for="Homelab/Storage/ZFS-VDEV--and--Storage">ZFS VDEV &amp; Storage</a></li></ul></div></li><li><a href="../../Homelab/Homelab" data-for="Homelab/Homelab">Homelab</a></li><li><a href="../../Homelab/To-do-or-explore-next" data-for="Homelab/To-do-or-explore-next">To do or explore next</a></li></ul></div></li><li><div class="folder-outer "><ul style="padding-left:0;" class="content" data-folderul></ul></div></li></ul></div></li><li id="explorer-end"></li></ul></div></div><footer class="desktop-only"><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.4.0</a> © 2026</p><ul></ul></footer></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../">one137</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../Homelab/">Homelab</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../Homelab/Services/">Services</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Services and network layout</a></div></nav><h1 class="article-title">Services and network layout</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-18T19:21:48.673Z">Oct 18, 2026</time></p></div></div><article class="popover-hint"><p>Four questions: how a request gets in, what deliberately does not go through the front door, where the machines and the bytes are, and how a failure gets noticed.</p>
+<p>This page is the map. For what each service <em>is</em> and how it is addressed, see <a href="../../Homelab/Services/Homelab-Services" class="internal alias" data-slug="Homelab/Services/Homelab-Services">Homelab Services</a>; for the reasoning behind each piece, see the per-service notes linked below.</p>
+<p>Throughout: amber is the ingress point, green is a Docker container, grey is something running directly on a host, blue is a device or service on the LAN, red is outside the homelab. Diagram 3 adds purple for hardware and teal for storage. A dotted edge is a name lookup or a read, not a data path.</p>
+<h2 id="1-how-a-request-reaches-a-service">1. How a request reaches a service<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-how-a-request-reaches-a-service" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Three ways in, one bouncer. Everything user-facing ends at <a href="../../Homelab/Services/Nginx-Proxy-Manager-(NPM)" class="internal alias" data-slug="Homelab/Services/Nginx-Proxy-Manager-(NPM)">NPM</a> — the only thing holding certificates and access lists — because service containers publish no host ports, so there is nothing else to talk to.</p>
+<ol>
+<li><strong>The public internet</strong>, for <code>one137.dev</code> only. <a href="../../Homelab/Internet-Infrastructure/Cloudflare" class="internal" data-slug="Homelab/Internet-Infrastructure/Cloudflare">Cloudflare</a> terminates TLS at its edge and a <a href="../../Homelab/Services/Cloudflared" class="internal" data-slug="Homelab/Services/Cloudflared">Cloudflared</a> tunnel carries the request inward. The tunnel is outbound-only: no inbound HTTP port is open anywhere, and <code>one137.dev</code>’s record points at the tunnel, not home (the only record that does is <a href="../../Homelab/Services/ddclient" class="internal" data-slug="Homelab/Services/ddclient">ddclient</a>’s, for WireGuard).</li>
+<li><strong>The LAN</strong>, for everything. <a href="../../Homelab/Services/Pi-Hole" class="internal" data-slug="Homelab/Services/Pi-Hole">Pi-Hole</a> answers every <code>*.one137.dev</code> name with <code>192.168.137.13</code>, so the request lands on NPM’s published <code>:443</code> directly, without leaving the LAN.</li>
+<li><strong><a href="../../Homelab/Services/Wireguard" class="internal alias" data-slug="Homelab/Services/Wireguard">WireGuard</a></strong>, for everything, from anywhere. The router forwards one UDP port and nothing else; a connected peer then behaves like a LAN client.</li>
+</ol>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    subgraph doors[\&quot;three ways in\&quot;]\n        pub[\&quot;the public internet\&quot;]\n        lanc[\&quot;a LAN device&lt;br/>192.168.137.0/24\&quot;]\n        rem[\&quot;a remote device&lt;br/>WireGuard peer 10.8.0.0/24\&quot;]\n    end\n\n    cfedge[\&quot;Cloudflare edge&lt;br/>DNS · TLS · WAF · rate limits\&quot;]\n    pihole[\&quot;pihole1 .10&lt;br/>one137.dev resolves to .13\&quot;]\n    router[\&quot;router .1&lt;br/>DHCP · only WG_PORT/udp forwarded\&quot;]\n    lanhosts[\&quot;proxmox · truenas&lt;br/>pihole1 · router&lt;br/>their own web UIs\&quot;]\n\n    subgraph dh[\&quot;dockerhost .13\&quot;]\n        cfd[\&quot;ct-cloudflared&lt;br/>outbound-only tunnel\&quot;]\n        wge[\&quot;ct-wireguard-easy&lt;br/>10.100.0.3\&quot;]\n        dnsm[\&quot;ct-dnsmasq-wireguard&lt;br/>10.100.0.2\&quot;]\n        npm[\&quot;ct-npm&lt;br/>certs · access lists · logs\&quot;]\n        svc[\&quot;service containers&lt;br/>no published ports\&quot;]\n    end\n\n    rem -->|\&quot;WG_PORT/udp\&quot;| router\n    router -->|\&quot;via an NPM stream host\&quot;| wge\n    wge -.->|\&quot;DNS\&quot;| dnsm\n    wge -->|\&quot;10.100.0.4:443\&quot;| npm\n\n    lanc -.->|\&quot;DNS\&quot;| pihole\n    lanc -->|\&quot;:443, stream ports\&quot;| npm\n\n    pub -->|\&quot;one137.dev\&quot;| cfedge\n    cfedge -->|\&quot;tunnel\&quot;| cfd\n    cfd -->|\&quot;to ct-npm\&quot;| npm\n\n    npm -->|\&quot;proxy host, or stream&lt;br/>8025 · 22000 · 27017\&quot;| svc\n    npm -->|\&quot;proxy host\&quot;| lanhosts\n\n    classDef wan fill:#fdecea,stroke:#c0392b,color:#3b1512\n    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b\n    classDef ct fill:#e8f5e9,stroke:#2e7d32,color:#16241a\n    classDef gate fill:#fff3d6,stroke:#b07d0a,color:#2e2410\n    class pub,cfedge wan\n    class lanc,rem,router,pihole,lanhosts net\n    class cfd,wge,dnsm,svc ct\n    class npm gate&quot;">flowchart LR
+    subgraph doors[&quot;three ways in&quot;]
+        pub[&quot;the public internet&quot;]
+        lanc[&quot;a LAN device&lt;br/>192.168.137.0/24&quot;]
+        rem[&quot;a remote device&lt;br/>WireGuard peer 10.8.0.0/24&quot;]
+    end
+
+    cfedge[&quot;Cloudflare edge&lt;br/>DNS · TLS · WAF · rate limits&quot;]
+    pihole[&quot;pihole1 .10&lt;br/>one137.dev resolves to .13&quot;]
+    router[&quot;router .1&lt;br/>DHCP · only WG_PORT/udp forwarded&quot;]
+    lanhosts[&quot;proxmox · truenas&lt;br/>pihole1 · router&lt;br/>their own web UIs&quot;]
+
+    subgraph dh[&quot;dockerhost .13&quot;]
+        cfd[&quot;ct-cloudflared&lt;br/>outbound-only tunnel&quot;]
+        wge[&quot;ct-wireguard-easy&lt;br/>10.100.0.3&quot;]
+        dnsm[&quot;ct-dnsmasq-wireguard&lt;br/>10.100.0.2&quot;]
+        npm[&quot;ct-npm&lt;br/>certs · access lists · logs&quot;]
+        svc[&quot;service containers&lt;br/>no published ports&quot;]
+    end
+
+    rem -->|&quot;WG_PORT/udp&quot;| router
+    router -->|&quot;via an NPM stream host&quot;| wge
+    wge -.->|&quot;DNS&quot;| dnsm
+    wge -->|&quot;10.100.0.4:443&quot;| npm
+
+    lanc -.->|&quot;DNS&quot;| pihole
+    lanc -->|&quot;:443, stream ports&quot;| npm
+
+    pub -->|&quot;one137.dev&quot;| cfedge
+    cfedge -->|&quot;tunnel&quot;| cfd
+    cfd -->|&quot;to ct-npm&quot;| npm
+
+    npm -->|&quot;proxy host, or stream&lt;br/>8025 · 22000 · 27017&quot;| svc
+    npm -->|&quot;proxy host&quot;| lanhosts
+
+    classDef wan fill:#fdecea,stroke:#c0392b,color:#3b1512
+    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b
+    classDef ct fill:#e8f5e9,stroke:#2e7d32,color:#16241a
+    classDef gate fill:#fff3d6,stroke:#b07d0a,color:#2e2410
+    class pub,cfedge wan
+    class lanc,rem,router,pihole,lanhosts net
+    class cfd,wge,dnsm,svc ct
+    class npm gate
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>Two details the diagram flattens:</p>
+<ul>
+<li><strong>NPM is on the WireGuard path twice.</strong> The router’s UDP port is published by NPM, which stream-forwards it to <code>ct-wireguard-easy</code>; the peer then resolves <code>*.one137.dev</code> through <a href="../../Homelab/Services/DNSMasq" class="internal alias" data-slug="Homelab/Services/DNSMasq">ct-dnsmasq-wireguard</a> to <code>10.100.0.4</code> — NPM again, this time on the WireGuard network rather than through dockerhost’s physical interface. That detour is what makes a WireGuard client distinguishable from an ordinary container in NPM’s logs, and it is why the access list can stay as tight as <code>192.168.137.0/24</code> plus <code>10.100.0.3/32</code>.</li>
+<li><strong>The public route is a single route.</strong> Two APIs are served under paths of it rather than on their own hostnames: <a href="../../Homelab/Public-website/Comments-API" class="internal alias" data-slug="Homelab/Public-website/Comments-API">Comments API</a> at <code>/comments-api</code> and <a href="../../Homelab/Services/Clipse-API" class="internal alias" data-slug="Homelab/Services/Clipse-API">Clipse API</a> at <code>/clipse-api/</code>. Everything else has no public route at all, so <a href="../../Homelab/Security/fail2ban" class="internal" data-slug="Homelab/Security/fail2ban">fail2ban</a> — which tails NPM’s proxy logs and pushes bans to Cloudflare’s API, since the public path never touches iptables — only ever sees traffic for those three.</li>
+</ul>
+<h2 id="2-what-does-not-go-through-npm">2. What does not go through NPM<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-what-does-not-go-through-npm" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="published-host-ports">Published host ports<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#published-host-ports" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Each one is an exception that needed a reason. Everything else publishes nothing.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Container</th><th>Published on</th><th>Why</th></tr></thead><tbody><tr><td><code>ct-npm</code></td><td><code>443</code>, plus the stream ports</td><td>the ingress itself</td></tr><tr><td><code>ct-pihole</code></td><td><code>53/tcp+udp</code>, all interfaces</td><td>DNS has to answer on the host’s own address</td></tr><tr><td><code>ct-portainer</code></td><td><code>9443</code>, all interfaces</td><td>NPM’s own stack cannot be edited through a proxy host on NPM</td></tr><tr><td><code>ct-ollama</code></td><td><code>127.0.0.1:11434</code></td><td>host-local only; containers would use <code>ct-ollama:11434</code></td></tr><tr><td><code>ct-upsnap</code></td><td>host network, listens on <code>172.17.0.1:8090</code></td><td>WOL magic packets need the host network, and a host-network container has no DNS record, so NPM targets docker0’s gateway instead</td></tr></tbody></table></div>
+<h3 id="couplings-between-services">Couplings between services<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#couplings-between-services" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Service-to-service traffic never touches NPM, and should not: access lists match on source IP, and a calling container arrives as a Docker subnet address — broad, and unstable across stack recreates (see <a href="../../Homelab/Services/Ollama" class="internal" data-slug="Homelab/Services/Ollama">Ollama</a> for the long version). It takes three forms, only the first of which is a network path.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n     cluster titles must stay short: mermaid clips them when they wrap\n    bootnvme[\&quot;boot NVMe 500 GB&lt;br/>proxmox + the VM disks\&quot;]\n    datanvme[\&quot;5 × 2 TB NVMe\&quot;]\n\n    subgraph proxmox[\&quot;proxmox .11\&quot;]\n        subgraph dockerhostvm[\&quot;dockerhost .13\&quot;]\n            vols[\&quot;/srv/docker/volumes/*&lt;br/>bind mounts owned by dockeruser\&quot;]\n            mounts[\&quot;/mnt/video-nas · SMB&lt;br/>/mnt/photos-nas · NFS\&quot;]\n        end\n        subgraph truenas[\&quot;truenas .12\&quot;]\n            pool[\&quot;ZFS main-pool · RAIDZ1&lt;br/>video · photos · users · backups · system\&quot;]\n            resticsrv[\&quot;Restic REST server :30248\&quot;]\n            sttn[\&quot;Syncthing app\&quot;]\n        end\n    end\n\n    workstations[\&quot;workstations\&quot;]\n\n    datanvme -->|\&quot;PCIe passthrough\&quot;| pool\n    vols -.->|\&quot;lives on the VM disk\&quot;| bootnvme\n    mounts -->|\&quot;over the LAN\&quot;| pool\n    resticsrv --> pool\n    sttn --> pool\n    workstations -->|\&quot;restic\&quot;| resticsrv\n\n    classDef hw fill:#f2eff7,stroke:#6a4c93,color:#221a2b\n    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b\n    classDef store fill:#e6f4f1,stroke:#2a7f76,color:#132724\n    class bootnvme,datanvme hw\n    class workstations net\n    class pool,resticsrv,sttn,vols,mounts store&quot;">flowchart TB
+     cluster titles must stay short: mermaid clips them when they wrap
+    bootnvme[&quot;boot NVMe 500 GB&lt;br/>proxmox + the VM disks&quot;]
+    datanvme[&quot;5 × 2 TB NVMe&quot;]
+
+    subgraph proxmox[&quot;proxmox .11&quot;]
+        subgraph dockerhostvm[&quot;dockerhost .13&quot;]
+            vols[&quot;/srv/docker/volumes/*&lt;br/>bind mounts owned by dockeruser&quot;]
+            mounts[&quot;/mnt/video-nas · SMB&lt;br/>/mnt/photos-nas · NFS&quot;]
+        end
+        subgraph truenas[&quot;truenas .12&quot;]
+            pool[&quot;ZFS main-pool · RAIDZ1&lt;br/>video · photos · users · backups · system&quot;]
+            resticsrv[&quot;Restic REST server :30248&quot;]
+            sttn[&quot;Syncthing app&quot;]
+        end
+    end
+
+    workstations[&quot;workstations&quot;]
+
+    datanvme -->|&quot;PCIe passthrough&quot;| pool
+    vols -.->|&quot;lives on the VM disk&quot;| bootnvme
+    mounts -->|&quot;over the LAN&quot;| pool
+    resticsrv --> pool
+    sttn --> pool
+    workstations -->|&quot;restic&quot;| resticsrv
+
+    classDef hw fill:#f2eff7,stroke:#6a4c93,color:#221a2b
+    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b
+    classDef store fill:#e6f4f1,stroke:#2a7f76,color:#132724
+    class bootnvme,datanvme hw
+    class workstations net
+    class pool,resticsrv,sttn,vols,mounts store
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p>The PCIe passthrough is the load-bearing decision: <a href="../../Homelab/OS-and-Virtualization/TrueNAS" class="internal" data-slug="Homelab/OS-and-Virtualization/TrueNAS">TrueNAS</a> receives the five data NVMes as whole devices rather than as virtual disks, so ZFS sees real hardware and the pool would survive being moved to another host. Docker persists everything locally under <code>/srv/docker/volumes/</code> on the dockerhost VM disk — bulk data stays on the pool and comes back in over SMB or NFS. <a href="../../Homelab/Services/Restic" class="internal" data-slug="Homelab/Services/Restic">Restic</a> runs the other way round: the server lives on the NAS and the workstations are its clients, so the homelab itself is not what gets backed up there.</p>
+<h2 id="4-how-a-failure-gets-noticed">4. How a failure gets noticed<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-how-a-failure-gets-noticed" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Every alert funnels into a single Telegram chat.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" aria-hidden="true" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TB\n    proxmoxn[\&quot;proxmox&lt;br/>SMTP only\&quot;] -->|\&quot;SMTP :8025&lt;br/>via an NPM stream\&quot;| mailrise[\&quot;ct-mailrise\&quot;]\n    truenasn[\&quot;truenas alerts\&quot;] --> tg[\&quot;Telegram\&quot;]\n    uk[\&quot;ct-uptime-kuma&lt;br/>service monitors\&quot;] --> tg\n    diun[\&quot;ct-diun&lt;br/>new images\&quot;] --> tg\n    wt[\&quot;ct-watchtower&lt;br/>auto-updates\&quot;] --> tg\n    f2b[\&quot;fail2ban&lt;br/>bans\&quot;] --> tg\n    capi[\&quot;ct-comments-api&lt;br/>comments, errors\&quot;] --> tg\n    mailrise --> tg\n    uk -->|\&quot;ping / 5 min\&quot;| hc[\&quot;healthchecks.io&lt;br/>dead-man switch\&quot;]\n    hc -->|\&quot;pings stop\&quot;| tg\n\n    classDef ct fill:#e8f5e9,stroke:#2e7d32,color:#16241a\n    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b\n    classDef wan fill:#fdecea,stroke:#c0392b,color:#3b1512\n    classDef host fill:#efefef,stroke:#5f6368,color:#202124\n    class mailrise,uk,diun,wt,capi ct\n    class f2b host\n    class proxmoxn,truenasn net\n    class tg,hc wan&quot;">flowchart TB
+    proxmoxn[&quot;proxmox&lt;br/>SMTP only&quot;] -->|&quot;SMTP :8025&lt;br/>via an NPM stream&quot;| mailrise[&quot;ct-mailrise&quot;]
+    truenasn[&quot;truenas alerts&quot;] --> tg[&quot;Telegram&quot;]
+    uk[&quot;ct-uptime-kuma&lt;br/>service monitors&quot;] --> tg
+    diun[&quot;ct-diun&lt;br/>new images&quot;] --> tg
+    wt[&quot;ct-watchtower&lt;br/>auto-updates&quot;] --> tg
+    f2b[&quot;fail2ban&lt;br/>bans&quot;] --> tg
+    capi[&quot;ct-comments-api&lt;br/>comments, errors&quot;] --> tg
+    mailrise --> tg
+    uk -->|&quot;ping / 5 min&quot;| hc[&quot;healthchecks.io&lt;br/>dead-man switch&quot;]
+    hc -->|&quot;pings stop&quot;| tg
+
+    classDef ct fill:#e8f5e9,stroke:#2e7d32,color:#16241a
+    classDef net fill:#eef3fa,stroke:#284b63,color:#16222b
+    classDef wan fill:#fdecea,stroke:#c0392b,color:#3b1512
+    classDef host fill:#efefef,stroke:#5f6368,color:#202124
+    class mailrise,uk,diun,wt,capi ct
+    class f2b host
+    class proxmoxn,truenasn net
+    class tg,hc wan
+</code><div id="mermaid-container"><div id="mermaid-space"><div class="mermaid-header"><button class="close-button" aria-label="close button"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div><div class="mermaid-content"></div></div></div></pre>
+<p><a href="../../Homelab/Services/Uptime-Kuma" class="internal" data-slug="Homelab/Services/Uptime-Kuma">Uptime-Kuma</a> carries a Docker monitor per container plus HTTP, DNS and keyword monitors for everything outside Docker, and <a href="../../Homelab/Services/Mailrise" class="internal" data-slug="Homelab/Services/Mailrise">Mailrise</a> exists because <a href="../../Homelab/OS-and-Virtualization/Proxmox" class="internal" data-slug="Homelab/OS-and-Virtualization/Proxmox">Proxmox</a> can only speak SMTP. <a href="../../Homelab/Services/Diun" class="internal" data-slug="Homelab/Services/Diun">Diun</a> reports new upstream images and <a href="../../Homelab/Services/Watchtower" class="internal" data-slug="Homelab/Services/Watchtower">Watchtower</a> reports what it updated, both on Saturday morning. <a href="../../Homelab/Services/Healthchecks" class="internal alias" data-slug="Homelab/Services/Healthchecks">healthchecks.io</a> watches Uptime-Kuma itself: if the 5-minute ping stops, the alert arrives from outside the homelab — the one failure a self-hosted monitor cannot report on itself.</p></article><hr/><div id="one137-comments"></div><script src="/comments.js"></script><div class="page-footer"></div></div><div class="right sidebar"><div class="toc desktop-only"><button type="button" id="toc" class aria-controls="toc-content" aria-expanded="true"><h3>Table of Contents</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="toc-content" class><ul class="overflow"><li class="depth-0"><a href="#1-how-a-request-reaches-a-service" data-for="1-how-a-request-reaches-a-service">1. How a request reaches a service</a></li><li class="depth-0"><a href="#2-what-does-not-go-through-npm" data-for="2-what-does-not-go-through-npm">2. What does not go through NPM</a></li><li class="depth-1"><a href="#published-host-ports" data-for="published-host-ports">Published host ports</a></li><li class="depth-1"><a href="#couplings-between-services" data-for="couplings-between-services">Couplings between services</a></li><li class="depth-0"><a href="#4-how-a-failure-gets-noticed" data-for="4-how-a-failure-gets-noticed">4. How a failure gets noticed</a></li></ul></div></div><div class="backlinks"><h3>Backlinks</h3><ul class="overflow"><li><a href="../../Homelab/Homelab" class="internal">Homelab</a></li><li><a href="../../Homelab/Services/Homelab-Networking" class="internal">Homelab Networking</a></li><li><a href="../../Homelab/Services/Homelab-Services" class="internal">Homelab Services</a></li><li><a href="../../Homelab/Services/Nginx-Proxy-Manager-(NPM)" class="internal">Nginx Proxy Manager (NPM)</a></li></ul></div></div></div></div></body><script type="application/javascript">function c(){let t=this.parentElement;t.classList.toggle("is-collapsed");let l=t.classList.contains("is-collapsed")?this.scrollHeight:t.scrollHeight;t.style.maxHeight=l+"px";let o=t,e=t.parentElement;for(;e;){if(!e.classList.contains("callout"))return;let n=e.classList.contains("is-collapsed")?e.scrollHeight:e.scrollHeight+o.scrollHeight;e.style.maxHeight=n+"px",o=e,e=e.parentElement}}function i(){let t=document.getElementsByClassName("callout is-collapsible");for(let s of t){let l=s.firstElementChild;if(l){l.addEventListener("click",c),window.addCleanup(()=>l.removeEventListener("click",c));let e=s.classList.contains("is-collapsed")?l.scrollHeight:s.scrollHeight;s.style.maxHeight=e+"px"}}}document.addEventListener("nav",i);window.addEventListener("resize",i);
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script type="module">function L(c){for(;c.firstChild;)c.removeChild(c.firstChild)}var h=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;ZOOM_SENSITIVITY=.001;setupEventListeners(){this.container.addEventListener("mousedown",this.onMouseDown.bind(this)),document.addEventListener("mousemove",this.onMouseMove.bind(this)),document.addEventListener("mouseup",this.onMouseUp.bind(this)),this.container.addEventListener("wheel",this.onWheel.bind(this),{passive:!1}),window.addEventListener("resize",this.resetTransform.bind(this))}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),s=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(s),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onWheel(e){e.preventDefault();let t=-e.deltaY*this.ZOOM_SENSITIVITY,n=Math.min(Math.max(this.scale+t,this.MIN_SCALE),this.MAX_SCALE),s=this.content.getBoundingClientRect(),r=e.clientX-s.left,i=e.clientY-s.top,o=n-this.scale;this.currentPan.x-=r*o,this.currentPan.y-=i*o,this.scale=n,this.updateTransform()}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),s=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=s*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1,this.currentPan={x:0,y:0},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],M;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;let t=T.reduce((r,i)=>(r[i]=getComputedStyle(document.documentElement).getPropertyValue(i),r),{});M||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let n=M.default,s=document.documentElement.getAttribute("saved-theme")==="dark";n.initialize({startOnLoad:!1,securityLevel:"loose",theme:s?"dark":"base",themeVariables:{fontFamily:t["--codeFont"],primaryColor:t["--light"],primaryTextColor:t["--darkgray"],primaryBorderColor:t["--tertiary"],lineColor:t["--darkgray"],secondaryColor:t["--secondary"],tertiaryColor:t["--tertiary"],clusterBkg:t["--light"],edgeLabelBackground:t["--highlight"]}}),await n.run({nodes:e});for(let r=0;r<e.length;r++){let E=function(){let d=a.querySelector("#mermaid-space"),u=a.querySelector(".mermaid-content");if(!u)return;L(u);let w=i.querySelector("svg").cloneNode(!0);u.appendChild(w),a.classList.add("active"),d.style.cursor="grab",y=new h(d,u)},m=function(){a.classList.remove("active"),y=null},f=function(d){d.key==="Escape"&&m()},i=e[r],o=i.parentElement,p=o.querySelector(".clipboard-button"),l=o.querySelector(".expand-button"),v=window.getComputedStyle(p),C=p.offsetWidth+parseFloat(v.marginLeft||"0")+parseFloat(v.marginRight||"0");l.style.right=`calc(${C}px + 0.3rem)`,o.prepend(l);let a=o.querySelector("#mermaid-container");if(!a)return;let y=null,g=a.querySelector(".close-button");g.addEventListener("click",m),l.addEventListener("click",E),document.addEventListener("keydown",f),window.addCleanup(()=>{g.removeEventListener("click",m),l.removeEventListener("click",E),document.removeEventListener("keydown",f)})}});
+</script><script src="../../postscript.js" type="module"></script></html>
