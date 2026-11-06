@@ -1,12 +1,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url>
+    <loc>https://one137.dev/knowledge/Homelab/Building-this-homelab</loc>
+    <lastmod>2026-11-04T08:25:29.395Z</lastmod>
+  </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Hardware/BD790i-Fan-Control-(Proxmox)</loc>
-    <lastmod>2026-10-18T19:26:05.189Z</lastmod>
+    <lastmod>2026-11-04T08:25:52.907Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Hardware/Specs</loc>
     <lastmod>2025-01-29T19:20:56.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Homelab</loc>
-    <lastmod>2026-10-18T12:24:29.333Z</lastmod>
+    <lastmod>2026-11-04T08:25:35.336Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Cloudflare</loc>
     <lastmod>2025-05-16T09:46:55.000Z</lastmod>
@@ -18,10 +21,10 @@
     <lastmod>2025-02-06T14:48:07.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-%E2%80%93-Domains-and-DNS</loc>
-    <lastmod>2026-10-18T19:26:05.189Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.258Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Reverse-Proxy</loc>
-    <lastmod>2026-10-18T19:21:48.673Z</lastmod>
+    <lastmod>2026-11-04T08:26:31.557Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Alpine-(Distro)</loc>
     <lastmod>2025-09-03T12:38:15.000Z</lastmod>
@@ -33,7 +36,7 @@
     <lastmod>2025-09-03T12:38:15.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Docker</loc>
-    <lastmod>2026-07-16T11:01:41.991Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.257Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Kali-Linux</loc>
     <lastmod>2025-02-04T13:31:51.000Z</lastmod>
@@ -42,25 +45,25 @@
     <lastmod>2024-11-24T13:36:55.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</loc>
-    <lastmod>2026-10-18T19:07:01.643Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.259Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</loc>
-    <lastmod>2026-06-01T12:06:05.317Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.260Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Remote-Graphical-OS-Access</loc>
     <lastmod>2025-02-04T13:35:19.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</loc>
-    <lastmod>2026-06-01T12:24:05.125Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.258Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Virtualization</loc>
     <lastmod>2025-05-16T09:41:50.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Comments-API</loc>
-    <lastmod>2026-09-09T14:19:27.675Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.259Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Continuous-Delivery</loc>
-    <lastmod>2026-10-18T19:35:23.926Z</lastmod>
+    <lastmod>2026-11-04T08:27:40.282Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Obsidian-Vault-to-Wiki</loc>
     <lastmod>2026-09-09T20:01:43.089Z</lastmod>
@@ -69,13 +72,13 @@
     <lastmod>2025-02-04T14:36:23.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Public-website/Serve-static-files-through-NPM</loc>
-    <lastmod>2026-10-18T19:35:23.926Z</lastmod>
+    <lastmod>2026-11-04T08:26:25.565Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/Encrypt-at-rest-2nd-drive-(cryptsetup)</loc>
     <lastmod>2026-06-06T09:39:10.958Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/Homelab-Security</loc>
-    <lastmod>2025-01-12T22:41:15.000Z</lastmod>
+    <lastmod>2026-11-04T08:27:01.747Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/Security---Cryptography</loc>
     <lastmod>2025-01-12T07:55:04.000Z</lastmod>
@@ -83,32 +86,35 @@
     <loc>https://one137.dev/knowledge/Homelab/Security/Token-Authenticators-(Security-Keys)</loc>
     <lastmod>2026-07-08T06:46:10.612Z</lastmod>
   </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Security/UFW-and-Docker</loc>
+    <lastmod>2026-11-06T20:43:08.260Z</lastmod>
+  </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Security/fail2ban</loc>
-    <lastmod>2026-10-18T19:35:23.926Z</lastmod>
+    <lastmod>2026-11-06T21:32:37.544Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Clipse-API</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:25:50.254Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Cloudflared</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:26:15.933Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/DNSMasq</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:27:21.641Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Diun</loc>
     <lastmod>2025-02-23T13:13:17.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Dufs</loc>
-    <lastmod>2026-10-18T19:07:01.642Z</lastmod>
+    <lastmod>2026-11-04T08:26:05.085Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Healthchecks</loc>
-    <lastmod>2025-01-10T20:46:24.000Z</lastmod>
+    <lastmod>2026-11-03T20:44:31.006Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Homelab-Networking</loc>
-    <lastmod>2026-10-18T19:07:01.642Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.260Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Homelab-Services</loc>
-    <lastmod>2026-10-18T19:07:01.642Z</lastmod>
+    <lastmod>2026-11-04T08:25:18.037Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Immich</loc>
     <lastmod>2026-10-18T19:39:27.182Z</lastmod>
@@ -117,40 +123,43 @@
     <lastmod>2025-10-27T08:28:09.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Mailrise</loc>
-    <lastmod>2026-10-18T19:21:48.673Z</lastmod>
+    <lastmod>2026-11-06T20:43:22.435Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/MongoDB</loc>
-    <lastmod>2026-10-18T19:07:01.642Z</lastmod>
+    <lastmod>2026-11-04T08:25:41.305Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:26:10.566Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Ollama</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:25:06.832Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Pi-Hole</loc>
-    <lastmod>2026-10-18T19:21:48.673Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.258Z</lastmod>
+  </url><url>
+    <loc>https://one137.dev/knowledge/Homelab/Services/Pinned-IP-addresses</loc>
+    <lastmod>2026-11-04T08:27:57.930Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Portainer</loc>
-    <lastmod>2026-10-18T19:39:27.182Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.258Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Radicale</loc>
-    <lastmod>2026-09-13T18:29:38.118Z</lastmod>
+    <lastmod>2026-11-04T07:59:44.168Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Restic</loc>
-    <lastmod>2026-10-18T19:39:27.182Z</lastmod>
+    <lastmod>2026-11-04T08:26:02.427Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Services-and-network-layout</loc>
-    <lastmod>2026-10-18T19:21:48.673Z</lastmod>
+    <lastmod>2026-11-04T08:25:02.443Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Syncthing</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:25:36.267Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Transmission</loc>
-    <lastmod>2026-10-18T19:35:23.927Z</lastmod>
+    <lastmod>2026-11-04T08:26:03.640Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/UpSnap</loc>
-    <lastmod>2026-09-09T15:35:03.215Z</lastmod>
+    <lastmod>2026-10-23T19:21:38.010Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</loc>
     <lastmod>2026-10-18T19:39:27.181Z</lastmod>
@@ -159,7 +168,7 @@
     <lastmod>2025-05-16T09:03:36.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/Wireguard</loc>
-    <lastmod>2026-10-18T19:07:01.642Z</lastmod>
+    <lastmod>2026-11-04T08:27:18.683Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Services/ddclient</loc>
     <lastmod>2025-05-16T09:47:08.000Z</lastmod>
@@ -198,10 +207,10 @@
     <lastmod>2024-11-30T10:37:18.000Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/Storage/iSCSI</loc>
-    <lastmod>2024-12-12T21:22:57.000Z</lastmod>
+    <lastmod>2026-11-06T20:43:08.259Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/Homelab/To-do-or-explore-next</loc>
-    <lastmod>2026-10-18T12:24:22.489Z</lastmod>
+    <lastmod>2026-11-04T08:25:36.451Z</lastmod>
   </url><url>
     <loc>https://one137.dev/knowledge/</loc>
     <lastmod>2026-10-18T12:22:33.527Z</lastmod>

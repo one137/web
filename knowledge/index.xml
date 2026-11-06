@@ -6,65 +6,65 @@
       <description>Last 10 notes on one137</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>Immich</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Immich</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Immich</guid>
-    <description>What immich.app Self-hosted photo and video management solution. Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease, without sacrificing your privacy.</description>
-    <pubDate>Sun, 18 Oct 2026 19:39:27 GMT</pubDate>
+    <title>fail2ban</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/fail2ban</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/fail2ban</guid>
+    <description>Security tool that monitors log files for suspicious activity (like repeated failed login attempts) and automatically blocks offending IP addresses for a specified period of time ...</description>
+    <pubDate>Fri, 06 Nov 2026 21:32:37 GMT</pubDate>
   </item><item>
-    <title>Portainer</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Portainer</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Portainer</guid>
-    <description>Setup docs.portainer.io/start/install-ce/server/docker/linux Find out the latest tag at hub.docker.com/r/portainer/portainer-ce/tags docker network create portainer_net ...</description>
-    <pubDate>Sun, 18 Oct 2026 19:39:27 GMT</pubDate>
+    <title>Mailrise</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Mailrise</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Mailrise</guid>
+    <description>Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-mailrise.yml mailrise.conf (file needs to be readable by user 999): configs: proxmox-notices-telegram: ...</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:22 GMT</pubDate>
   </item><item>
-    <title>Restic</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Restic</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Restic</guid>
-    <description>What restic.net A modern backup solution: effective – only transferring the parts that actually changed in the files you back up secure – by careful use of cryptography in every part ...</description>
-    <pubDate>Sun, 18 Oct 2026 19:39:27 GMT</pubDate>
+    <title>Proxmox</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Proxmox</guid>
+    <description>Linux Systems Setup Quid Proxmox Virtual Environment (Proxmox VE or PVE) is a Virtualization platform designed for the provisioning of HCI (hyper-converged infrastructure: virtualized ...</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Uptime-Kuma</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Uptime-Kuma</guid>
-    <description>Service monitoring tool with fancy UI. Monitoring uptime for HTTP(S) / TCP / Keyword and Json Query / Ping / DNS Record / Docker Containers / etc Notifications via Telegram, Pushover, SMTP, and 90 more Multiple status pages, Mappable to specific domains Ping chart, Certificate info, and much more.</description>
-    <pubDate>Sun, 18 Oct 2026 19:39:27 GMT</pubDate>
+    <title>UFW and Docker</title>
+    <link>https://one137.dev/knowledge/Homelab/Security/UFW-and-Docker</link>
+    <guid>https://one137.dev/knowledge/Homelab/Security/UFW-and-Docker</guid>
+    <description>For the generic UFW setup, see Linux Systems Setup. This is the dockerhost firewall: a host layer (ufw) and a Docker layer on top of it (ufw-docker). Its rules rely on Docker allocating networks inside 172.16.0.0/12 only, which its pinned address pools guarantee (the WireGuard network, 10.100.0.0/24, is set by hand).</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Clipse API</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Clipse-API</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Clipse-API</guid>
-    <description>Tiny custom API to push clipboard entries to the homelab from anywhere (mainly from iOS shortcuts), and read the latest one back. Entries are written to clipse’s history file, which lives in a Syncthing-synced folder, so anything sent to the API ends up in the clipboard history of my machines.</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>Homelab Networking</title>
+    <link>https://one137.dev/knowledge/Homelab/Services/Homelab-Networking</link>
+    <guid>https://one137.dev/knowledge/Homelab/Services/Homelab-Networking</guid>
+    <description>See Services and network layout. Useful commands ip address ip route On macOS, if using a conflicting subnet such as 192.168.1.0/24 (not the case of this homelab anymore), explicitly route IPs 192.168.1.96/28 (16 IPs, 96-111) through the VPN interface: sudo route add -net 192.168.1.96 -netmask 255.255.255.240 -interface utun4 Flush DNS chache: sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder List all tcp/udp listening ports and their proceses: sudo ss -tulpn or netstat if ss is unavailable Display the kernel routing table: netstat -r Docker Networking Using a star network, where each container is isolated from one another (except where a stack joins another’s network on purpose, e.g.</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Cloudflared</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Cloudflared</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Cloudflared</guid>
-    <description>Command-line daemon that creates secure tunnels between local services and Cloudflare’s edge network, allowing to expose local applications to the internet without opening inbound ...</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>Linux Systems Setup</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/Linux-Systems-Setup</guid>
+    <description>General (Debian) # As root, if no admin user created at install apt install sudo &amp;&amp; adduser USER &amp;&amp; usermod -aG sudo USER su - USER # As admin user sudo apt update &amp;&amp; ...</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>DNSMasq</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/DNSMasq</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/DNSMasq</guid>
-    <description>Dnsmasq provides DNS, DHCP, router advertisement and network boot for small networks infrastrutures. The DNS subsystem provides a local DNS server for the network, with forwarding of all query types to upstream recursive DNS servers and caching of common record types (A, AAAA, CNAME, etc).</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>Comments API</title>
+    <link>https://one137.dev/knowledge/Homelab/Public-website/Comments-API</link>
+    <guid>https://one137.dev/knowledge/Homelab/Public-website/Comments-API</guid>
+    <description>Custom solution that provides a comments section to every page of the Wiki. The frontend is generated by a script which is included at the bottom of every Quartz page.</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Nginx Proxy Manager (NPM)</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Nginx-Proxy-Manager-(NPM)</guid>
-    <description>Simple reverse proxy to expose services with Proxy and stream hosts A beginner-friendly UI Let’s Encrypt certs generation and auto-renewal Access lists UI-toggleable options ...</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>iSCSI</title>
+    <link>https://one137.dev/knowledge/Homelab/Storage/iSCSI</link>
+    <guid>https://one137.dev/knowledge/Homelab/Storage/iSCSI</guid>
+    <description>Internet SCSI is an IP-based storage networking standard for linking data storage facilities. iSCSI provides block-level access to storage devices by carrying SCSI commands over a TCP/IP network.</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Ollama</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Ollama</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Ollama</guid>
-    <description>Runs LLMs locally, exposing them through a simple API (and to any compatible frontend). ollama.com Setup Stack config: github.com/one137/dockerhost-stacks/blob/main/stacks/50-ollama.yml CPU-only inference on the 7945HX, so the container is given generous limits (10G RAM, 22 CPUs) while staying otherwise locked down (read_only, cap_drop: ALL + SYS_NICE, no-new-privileges).</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>2 – Domains and DNS</title>
+    <link>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-%E2%80%93-Domains-and-DNS</link>
+    <guid>https://one137.dev/knowledge/Homelab/Internet-Infrastructure/Introductory-presentation/2-%E2%80%93-Domains-and-DNS</guid>
+    <description>DNS Fundamentals DNS (Domain Name System) translates human-readable domain names into IP addresses Like a phone book for the Internet… or your LAN On the Internet: hierarchical, ...</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item><item>
-    <title>Syncthing</title>
-    <link>https://one137.dev/knowledge/Homelab/Services/Syncthing</link>
-    <guid>https://one137.dev/knowledge/Homelab/Services/Syncthing</guid>
-    <description>Setup Syncthing as TrueNAS App In TrueNAS Create syncthing dataset, type Generic (not samba!) Owner probably needs to be 1000:1000 or “apps” Add app UID GID 1000 or “apps” Config storage ...</description>
-    <pubDate>Sun, 18 Oct 2026 19:35:23 GMT</pubDate>
+    <title>TrueNAS</title>
+    <link>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</link>
+    <guid>https://one137.dev/knowledge/Homelab/OS-and-Virtualization/TrueNAS</guid>
+    <description>TrueNAS Scale is a network-attached storage (NAS) product produced by iXsystems. Based on the Open ZFS file system, it runs on Linux and is compatible with virtualization hosts such as Proxmox.</description>
+    <pubDate>Fri, 06 Nov 2026 20:43:08 GMT</pubDate>
   </item>
     </channel>
   </rss>
